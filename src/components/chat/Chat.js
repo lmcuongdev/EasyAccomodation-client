@@ -24,7 +24,7 @@ export class Chat extends Component {
 				let mes_history = [];
 				for (let item of res.data.user) {
 					if (item.firstMessage) {
-						if (item.participants[0] == this.state.senderId) {
+						if (item.participants[0] === this.state.senderId) {
 							mes_history.push({
 								user: item.participants[1],
 								content: item.firstMessage.content,

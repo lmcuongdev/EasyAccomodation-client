@@ -24,9 +24,7 @@ export class Profile extends Component {
 
 	componentDidMount() {
 		axios
-			.get(
-				"https://easy-accommodation-api.herokuapp.com/api/users/5fdf13079ef978eafb549294"
-			)
+			.get(`${process.env.API_URL}/users/5fdf13079ef978eafb549294`)
 			.then((res) => {
 				let user = res.data.user;
 				this.setState({

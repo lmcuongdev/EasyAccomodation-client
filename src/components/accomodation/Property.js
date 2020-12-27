@@ -44,12 +44,11 @@ class Property extends React.Component {
 	}
 
 	componentDidMount() {
-		axios
-			.get("https://easy-accommodation-api.herokuapp.com/api/accommodations")
-			.then((res) => {
-				const data = res.data.accommodations;
-				this.setState({ accomod_list: data });
-			});
+		console.log(`${process.env.REACT_APP_API_URL}/accommodations`);
+		axios.get(`${process.env.API_URL}/accommodations`).then((res) => {
+			const data = res.data.accommodations;
+			this.setState({ accomod_list: data });
+		});
 	}
 
 	render() {

@@ -6,7 +6,7 @@ import Image from "../../images/logo512.png";
 
 class PropertyItem extends React.Component {
 	showState() {
-		if (this.props.is_available == false) {
+		if (this.props.is_available === false) {
 			return <div className="aa-tag bg-warning">Sold out</div>;
 		} else {
 			return <div className="aa-tag bg-info">For rent</div>;

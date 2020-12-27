@@ -42,9 +42,7 @@ class PropertyDetail extends React.Component {
 
 	componentDidMount() {
 		axios
-			.get(
-				`https://easy-accommodation-api.herokuapp.com/api/accommodations/${this.state.id}`
-			)
+			.get(`${process.env.API_URL}/accommodations/${this.state.id}`)
 			.then((res) => {
 				const data = res.data.accommodation;
 				this.setState({
@@ -82,7 +80,7 @@ class PropertyDetail extends React.Component {
 						<section className="intro-single">
 							<div className="title-single-box">
 								<div>
-									{this.state.is_available == true ? (
+									{this.state.is_available === true ? (
 										<button className="btn btn-info btn-lg">For rent</button>
 									) : (
 										<button className="btn btn-warning btn-lg">Sold out</button>
