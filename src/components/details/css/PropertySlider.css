@@ -1,0 +1,10 @@
+.gallery-property {
+	margin-bottom: 3rem;
+	width: 100%;
+}
+
+.gallery-property img {
+	width: 100%;
+	height: 600px;
+	margin: auto;
+}

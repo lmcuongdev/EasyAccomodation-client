@@ -1,0 +1,24 @@
+.property-agent .title-agent {
+	font-weight: 600;
+}
+
+.property-agent ul {
+	line-height: 2;
+	color: #000000;
+}
+
+.property-agent .socials-a {
+	text-align: center;
+}
+
+.socials-a .list-inline-item:not(:last-child) {
+	margin-right: 25px;
+}
+
+.property-agent .socials-a {
+	text-align: center;
+}
+
+.card-box-d .list-inline-item:not(:last-child) {
+	margin-right: 25px;
+}

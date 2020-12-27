@@ -1,0 +1,16 @@
+.rate-show > label:before {
+	margin: 5px;
+	font-size: 1.25em;
+	font-family: FontAwesome;
+	display: inline-block;
+	content: "\f005";
+}
+
+.rate-show > label {
+	color: #ddd;
+	float: right;
+}
+
+.rate-show .checked {
+	color: #ffd700;
+}

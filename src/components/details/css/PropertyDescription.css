@@ -1,0 +1,30 @@
+.color-text-a {
+	color: #555555;
+}
+
+/*------/ List a /------*/
+
+.list-a {
+	display: inline-block;
+	line-height: 2;
+	padding: 0;
+	list-style: none;
+}
+
+.list-a li {
+	position: relative;
+	width: 50%;
+	float: left;
+	padding-left: 25px;
+	padding-right: 5px;
+}
+
+.list-a li:before {
+	content: "";
+	width: 10px;
+	height: 2px;
+	position: absolute;
+	background-color: #313131;
+	top: 15px;
+	left: 0;
+}

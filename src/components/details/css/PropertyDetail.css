@@ -1,0 +1,27 @@
+.intro-single {
+	padding: 2rem 0 2rem;
+	width: 100%;
+}
+
+.intro-single .title-single-box {
+	padding: 1rem 0rem 1rem 2rem;
+	width: 100%;
+}
+
+.intro-single .title-single-box {
+	border-left: 3px solid #2eca6a;
+}
+
+.intro-single .title-single-box .title-single {
+	font-weight: 600;
+	font-size: 1.75rem;
+}
+
+.intro-single button {
+	float: right;
+	margin: 0em 0em 0.1em 0.5em;
+}
+
+.intro-single button i {
+	margin-right: 0.2em;
+}
