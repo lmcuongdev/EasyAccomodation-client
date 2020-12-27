@@ -1,0 +1,63 @@
+.progress {
+	height: 50px;
+
+	-webkit-border-top-left-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-right-radius: 10px;
+}
+
+.progress-1 {
+	background-color: #33a837 !important;
+	width: 33%;
+}
+
+.progress-2 {
+	background-color: #33a837 !important;
+	width: 66%;
+}
+
+.progress-3 {
+	background-color: #33a837 !important;
+	width: 100%;
+}
+
+.progress-color {
+	background-image: linear-gradient(
+		45deg,
+		hsla(0, 0%, 100%, 0.15) 25%,
+		transparent 0,
+		transparent 50%,
+		hsla(0, 0%, 100%, 0.15) 0,
+		hsla(0, 0%, 100%, 0.15) 75%,
+		transparent 0,
+		transparent
+	) !important;
+
+	background-size: 40px 40px !important;
+}
+
+.preview img {
+	margin-top: 30px;
+	width: 100%;
+}
+
+.finish {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.input-group textarea {
+	width: 100%;
+}
+
+.back-btn {
+	position: absolute;
+}
+
+.back-btn i {
+	margin-right: 0.6em;
+}

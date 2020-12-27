@@ -1,0 +1,57 @@
+body {
+	background-color: #ffffff;
+	font-family: "Open Sans", sans-serif;
+	color: #333333;
+	font-size: 15px;
+	overflow-x: hidden;
+
+	justify-content: center;
+	align-items: center;
+}
+
+.no-padding {
+	padding: 0;
+}
+
+/* MODULES - Individual site components */
+ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+/* a {
+	text-decoration: none !important;
+	color: white !important;
+}
+
+a:hover,
+a:focus {
+	outline: none;
+	text-decoration: none;
+	color: rgb(175, 235, 222) !important;
+} */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Poppins", sans-serif;
+}
+
+h2 {
+	font-size: 25px;
+	font-weight: 700;
+	line-height: 40px;
+	margin: 0;
+}
+
+img {
+	border: none;
+}
+
+#container-content {
+	margin-top: 150px;
+}
