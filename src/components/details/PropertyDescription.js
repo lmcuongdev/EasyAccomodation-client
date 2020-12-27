@@ -31,25 +31,25 @@ class PropertyDescription extends React.Component {
 				</div>
 				<div className="amenities-list color-text-a">
 					<ul className="list-a no-margin">
-						{this.props.same_owner == true ? (
+						{this.props.same_owner === true ? (
 							<li>Co chung chu</li>
 						) : (
 							<li>Khong chung chu</li>
 						)}
 						<li>{this.props.number_of_room} Phong</li>
-						{this.props.has_balcony == true ? <li>Ban cong</li> : null}
-						{this.props.kitchen == "private" ? (
+						{this.props.has_balcony === true ? <li>Ban cong</li> : null}
+						{this.props.kitchen === "private" ? (
 							<li>Bep rieng</li>
 						) : (
 							<li>Bep chung</li>
 						)}
 						{this.props.has_air_condition ? <li>Dieu hoa</li> : null}
-						{this.props.has_private_bathroom == true ? (
+						{this.props.has_private_bathroom === true ? (
 							<li>Phong tam rieng</li>
 						) : (
 							<li>Phong tam chung</li>
 						)}
-						{this.props.has_water_heater == true ? (
+						{this.props.has_water_heater === true ? (
 							<li>Binh nong lanh</li>
 						) : null}
 					</ul>

@@ -82,7 +82,7 @@ class PropertyDetail extends React.Component {
 						<section className="intro-single">
 							<div className="title-single-box">
 								<div>
-									{this.state.is_available == true ? (
+									{this.state.is_available === true ? (
 										<button className="btn btn-info btn-lg">For rent</button>
 									) : (
 										<button className="btn btn-warning btn-lg">Sold out</button>
