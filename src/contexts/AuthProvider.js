@@ -27,12 +27,8 @@ class AuthProvider extends React.Component {
 
 		if (data && data.token && new Date(data.expiration) > new Date()) {
 			this.logIn(data, new Date(data.expiration));
-		} else {
-			this.logOut();
 		}
-	}
 
-	componentDidUpdate() {
 		if (this.state.token && this.state.expiration) {
 			const remainingTime =
 				this.state.expiration.getTime() - new Date().getTime();
@@ -44,7 +40,7 @@ class AuthProvider extends React.Component {
 
 	logIn({ userId, token, role }, expirationDate) {
 		const tokenExpirationDate =
-			expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
+			expirationDate || new Date(new Date().getTime() + 1000 * 10);
 
 		// save token and data to localStorage
 		localStorage.setItem(
@@ -63,7 +59,7 @@ class AuthProvider extends React.Component {
 			userId,
 			token,
 			role,
-			expiration: tokenExpirationDate,
+			expiration: tokenExpirationDate.toISOString(),
 		});
 	}
 
@@ -79,7 +75,7 @@ class AuthProvider extends React.Component {
 	}
 
 	redirectTo(path) {
-		this.props.history.replace({ pathname: path });
+		this.props.history.push(path);
 	}
 
 	render() {
