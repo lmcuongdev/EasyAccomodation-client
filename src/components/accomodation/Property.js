@@ -33,11 +33,35 @@ class Property extends React.Component {
 					);
 				});
 			case "horizontal":
-				return [
-					<PropertyItemHorizontal />,
-					<PropertyItemHorizontal />,
-					<PropertyItemHorizontal />,
-				];
+				if (this.props.myAccomod) {
+					return [
+						<PropertyItemHorizontal myAccomod={this.props.myAccomod} />,
+						<PropertyItemHorizontal
+							myAccomod={this.props.myAccomod}
+							isVerified={true}
+							editable={false}
+							sendRequest={this.state.sendRequest}
+						/>,
+						<PropertyItemHorizontal
+							myAccomod={this.props.myAccomod}
+							isVerified={true}
+							editable={false}
+							sendRequest={this.state.sendRequest}
+						/>,
+						<PropertyItemHorizontal
+							myAccomod={this.props.myAccomod}
+							isVerified={true}
+							editable={false}
+							sendRequest={this.state.sendRequest}
+						/>,
+					];
+				} else {
+					return [
+						<PropertyItemHorizontal is_available="true" />,
+						<PropertyItemHorizontal />,
+					];
+				}
+
 			default:
 				break;
 		}

@@ -12,7 +12,7 @@ export class Profile extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			page: "aboutMe",
+			page: this.props.match.params.page,
 			name: null,
 			email: null,
 			role: null,
@@ -47,8 +47,14 @@ export class Profile extends Component {
 		this.setState({ [event.target.name]: event.target.value });
 	};
 
+	componentDidUpdate() {
+		if (this.state.page !== this.props.match.params.page) {
+			this.setState({ page: this.props.match.params.page });
+		}
+	}
+
 	showPage() {
-		switch (this.props.page) {
+		switch (this.state.page) {
 			case "aboutMe":
 				return (
 					<UserInfo
@@ -61,12 +67,10 @@ export class Profile extends Component {
 				);
 			case "changePassword":
 				return <ChangePassword />;
-			case "history":
-				return <Property orientation="horizontal" />;
+			case "owner":
+				return <Property orientation="horizontal" myAccomod="true" />;
 			case "favorite":
 				return <Property orientation="horizontal" />;
-			case "edit":
-				return <EditAccomod />;
 			default:
 				break;
 		}
@@ -80,7 +84,6 @@ export class Profile extends Component {
 						<div class="col-md-3">
 							<ProfileSidebar
 								page={this.state.page}
-								changePage={this.changePage}
 								name={this.state.name}
 								role={this.state.role}
 							/>

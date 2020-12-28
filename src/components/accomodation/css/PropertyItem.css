@@ -87,3 +87,7 @@
 .aa-properties-item .aa-properties-item-content .aa-properties-detial .btn {
 	float: right;
 }
+
+.list-group-item {
+	width: 95%;
+}

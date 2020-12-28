@@ -58,25 +58,10 @@ class App extends Component {
 					<div className="container" id="container-content">
 						<Switch>
 							<Route path="/" exact component={Home} />
-							<Route path="/sign-in" component={SignIn} />
+							<Route path="/sign-in" component={SignIn} exact />
 							<Route path="/sign-up" component={SignUp} />
 							<Route path="/property-detail/:id" component={PropertyDetail} />
-							<Route path="/favorite" component={FavoriteList} />
-							<Route path="/profile/favorite">
-								<Profile page="favorite" />
-							</Route>
-							<Route path="/profile/history">
-								<Profile page="history" />
-							</Route>
-							<Route path="/profile/aboutMe">
-								<Profile page="aboutMe" />
-							</Route>
-							<Route path="/profile/changePassword">
-								<Profile page="changePassword" />
-							</Route>
-							<Route path="/profile/edit">
-								<Profile page="edit" />
-							</Route>
+							<Route path="/profile/:page" component={Profile} exact />
 							<Route path="/rent" component={Rent} />
 							<Route exact path="/chat/:id/:id_sender" component={Chat} />
 							<Route path="/chat/:id_sender" component={Chat} />

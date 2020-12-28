@@ -6,7 +6,7 @@ import "./NewPost.css";
 export class Rent_Address extends Component {
 	render() {
 		return (
-			<div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
+			<div className="page-wrapper p-t-45 p-b-50">
 				<div className="wrapper wrapper--w790">
 					<div className="card card-5">
 						<div className="progress">
