@@ -1,8 +1,13 @@
+import axios from "axios";
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import AuthContext from "../../contexts/AuthContext";
 
 import "./css/SignUp.css";
 
 export class SignUp extends Component {
+	static contextType = AuthContext;
+
 	constructor() {
 		super();
 		this.state = {
@@ -14,6 +19,7 @@ export class SignUp extends Component {
 			address: "",
 			role: "renter",
 			citizen_id: "",
+			error: null,
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -26,13 +32,27 @@ export class SignUp extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
-		console.log(this.state);
+		this.setState({ error: null });
+		axios
+			.post(`${process.env.REACT_APP_API_URL}/users/signup`, {
+				...this.state,
+			})
+			.then((resp) => {
+				this.context.logIn(resp.data);
+				this.context.redirectTo("/");
+			})
+			.catch((err) => {
+				this.setState({ error: err.response.data.message });
+			});
 	}
 
 	render() {
-		return (
+		return !this.context.isLoggedIn ? (
 			<div className="page-wrapper p-t-45 p-b-50">
 				<div className="wrapper wrapper--w790">
+					{this.state.error && (
+						<div className="alert alert-danger">{this.state.error}</div>
+					)}
 					<div className="card card-5">
 						<div className="card-heading bg-dark">
 							<h2 className="title">Event Registration Form</h2>
@@ -86,12 +106,17 @@ export class SignUp extends Component {
 									<div className="value">
 										<div className="input-group">
 											<input
-												className="input--style-5"
+												className={`input--style-5 ${
+													this.state.password !==
+														this.state.password_confirmation &&
+													"is-invalid border border-danger"
+												}`}
 												type="password"
 												name="password_confirmation"
 												value={this.state.password_confirmation}
 												onChange={this.handleChange}
 											/>
+											<div className="invalid-feedback">Password not match</div>
 										</div>
 									</div>
 								</div>
@@ -177,6 +202,8 @@ export class SignUp extends Component {
 					</div>
 				</div>
 			</div>
+		) : (
+			<Redirect to="/" />
 		);
 	}
 }
