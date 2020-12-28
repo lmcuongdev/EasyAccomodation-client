@@ -69,11 +69,7 @@ export class UserInfo extends Component {
 								</div>
 							</div>
 							<div className="finish">
-								<button className="btn btn--radius-2 btn--red">
-									<Link to="/" style={{ textDecoration: "none" }}>
-										Update
-									</Link>
-								</button>
+								<button className="btn btn--radius-2 btn--red">Update</button>
 							</div>
 						</form>
 					</div>

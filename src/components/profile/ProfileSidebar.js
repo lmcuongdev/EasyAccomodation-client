@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import Image from "../../images/test.jpg";
 
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 export class ProfileSidebar extends Component {
+	handleClick = (page) => {
+		this.props.history.push(`/${page}`);
+	};
+
 	render() {
 		return (
 			<div id="menu" class="menu">
@@ -22,37 +26,47 @@ export class ProfileSidebar extends Component {
 							<li
 								className={this.props.page !== "aboutMe" || "bg-primary"}
 								onClick={() => {
-									this.props.changePage("aboutMe");
+									this.handleClick("profile/aboutMe");
 								}}
 							>
-								<Link to="/profile/aboutMe">About Me</Link>
+								<span>About Me</span>
 							</li>
-							{this.props.role === "renter" ? (
-								<li
-									className={this.props.page !== "favorite" || "bg-primary"}
-									onClick={() => {
-										this.props.changePage("favorite");
-									}}
-								>
-									<Link to="/profile/favorite">Favorite Accomod</Link>
-								</li>
-							) : (
-								<li
-									className={this.props.page !== "history" || "bg-primary"}
-									onClick={() => {
-										this.props.changePage("history");
-									}}
-								>
-									<Link to="/profile/history">History</Link>
-								</li>
-							)}
+							<li
+								className={this.props.page !== "favorite" || "bg-primary"}
+								onClick={() => {
+									this.handleClick("profile/favorite");
+								}}
+							>
+								<span>Favorite Accomod</span>
+							</li>
+							{this.props.role === "owner"}
+							{
+								<>
+									<li
+										className={this.props.page !== "owner" || "bg-primary"}
+										onClick={() => {
+											this.handleClick("profile/owner");
+										}}
+									>
+										<span>My Accomod</span>
+									</li>
+									<li
+										className={this.props.page !== "rent" || "bg-primary"}
+										onClick={() => {
+											this.handleClick("rent");
+										}}
+									>
+										<span>New post</span>
+									</li>
+								</>
+							}
 							<li
 								className={this.props.page !== "changePassword" || "bg-primary"}
 								onClick={() => {
-									this.props.changePage("changePassword");
+									this.handleClick("profile/changePassword");
 								}}
 							>
-								<Link to="/profile/changePassword">Change Password</Link>
+								<span>Change Password</span>
 							</li>
 						</ul>
 					</nav>
@@ -62,4 +76,4 @@ export class ProfileSidebar extends Component {
 	}
 }
 
-export default ProfileSidebar;
+export default withRouter(ProfileSidebar);

@@ -12,7 +12,8 @@ export class SignUp extends Component {
 			password_confirmation: "",
 			phone: "",
 			address: "",
-			role: "",
+			role: "renter",
+			citizen_id: "",
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -30,7 +31,7 @@ export class SignUp extends Component {
 
 	render() {
 		return (
-			<div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
+			<div className="page-wrapper p-t-45 p-b-50">
 				<div className="wrapper wrapper--w790">
 					<div className="card card-5">
 						<div className="card-heading">
@@ -61,34 +62,6 @@ export class SignUp extends Component {
 												type="email"
 												name="email"
 												value={this.state.email}
-												onChange={this.handleChange}
-											/>
-										</div>
-									</div>
-								</div>
-								<div className="form-row">
-									<div className="name">Phone</div>
-									<div className="value">
-										<div className="input-group">
-											<input
-												className="input--style-5"
-												type="number"
-												name="phone"
-												value={this.state.phone}
-												onChange={this.handleChange}
-											/>
-										</div>
-									</div>
-								</div>
-								<div className="form-row">
-									<div className="name">Address</div>
-									<div className="value">
-										<div className="input-group">
-											<input
-												className="input--style-5"
-												type="text"
-												name="address"
-												value={this.state.address}
 												onChange={this.handleChange}
 											/>
 										</div>
@@ -130,6 +103,7 @@ export class SignUp extends Component {
 											<input
 												type="radio"
 												name="role"
+												checked={this.state.role === "renter" ? true : false}
 												value="renter"
 												onChange={this.handleChange}
 											/>
@@ -147,6 +121,52 @@ export class SignUp extends Component {
 										</label>
 									</div>
 								</div>
+								{this.state.role === "owner" ? (
+									<>
+										<div className="form-row">
+											<div className="name">Phone</div>
+											<div className="value">
+												<div className="input-group">
+													<input
+														className="input--style-5"
+														type="text"
+														name="phone"
+														value={this.state.phone}
+														onChange={this.handleChange}
+													/>
+												</div>
+											</div>
+										</div>
+										<div className="form-row">
+											<div className="name">Address</div>
+											<div className="value">
+												<div className="input-group">
+													<input
+														className="input--style-5"
+														type="text"
+														name="address"
+														value={this.state.address}
+														onChange={this.handleChange}
+													/>
+												</div>
+											</div>
+										</div>
+										<div className="form-row">
+											<div className="name">Citizen Id</div>
+											<div className="value">
+												<div className="input-group">
+													<input
+														className="input--style-5"
+														type="text"
+														name="citizen_id"
+														value={this.state.citizen_id}
+														onChange={this.handleChange}
+													/>
+												</div>
+											</div>
+										</div>
+									</>
+								) : null}
 								<div>
 									<button className="btn btn--radius-2 btn--red" type="submit">
 										Register
