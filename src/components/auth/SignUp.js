@@ -34,7 +34,7 @@ export class SignUp extends Component {
 			<div className="page-wrapper p-t-45 p-b-50">
 				<div className="wrapper wrapper--w790">
 					<div className="card card-5">
-						<div className="card-heading">
+						<div className="card-heading bg-dark">
 							<h2 className="title">Event Registration Form</h2>
 						</div>
 						<div className="card-body">

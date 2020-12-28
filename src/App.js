@@ -19,6 +19,7 @@ import NotFound from "./components/NotFound";
 import Rent from "./components/post/Rent";
 import Chat from "./components/chat/Chat";
 
+import AuthProvider from "./contexts/AuthProvider";
 class App extends Component {
 	constructor() {
 		super();
@@ -48,8 +49,8 @@ class App extends Component {
 
 	render() {
 		return (
-			<div>
-				<Router>
+			<Router>
+				<AuthProvider>
 					<Header openPopup={this.openPopup} />
 					<Popup
 						popupState={this.state.popupState}
@@ -69,8 +70,8 @@ class App extends Component {
 						</Switch>
 					</div>
 					<Footer />
-				</Router>
-			</div>
+				</AuthProvider>
+			</Router>
 		);
 	}
 }
