@@ -31,8 +31,7 @@ class SignIn extends React.Component {
 				...this.state,
 			})
 			.then((resp) => {
-				const { userId, token } = resp.data;
-				this.context.logIn(userId, token);
+				this.context.logIn(resp.data);
 				this.context.redirectTo("/");
 			})
 			.catch((err) => {

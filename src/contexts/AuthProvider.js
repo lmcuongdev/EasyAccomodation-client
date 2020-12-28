@@ -10,6 +10,7 @@ class AuthProvider extends React.Component {
 			isLoggedIn: false,
 			token: null,
 			userId: null,
+			role: null,
 			expiration: null,
 		};
 
@@ -25,7 +26,7 @@ class AuthProvider extends React.Component {
 		const data = JSON.parse(localStorage.getItem("userData") || "{}");
 
 		if (data && data.token && new Date(data.expiration) > new Date()) {
-			this.logIn(data.userId, data.token, new Date(data.expiration));
+			this.logIn(data, new Date(data.expiration));
 		}
 
 		if (this.state.token && this.state.expiration) {
@@ -37,9 +38,9 @@ class AuthProvider extends React.Component {
 		}
 	}
 
-	logIn(userId, token, expirationDate) {
+	logIn({ userId, token, role }, expirationDate) {
 		const tokenExpirationDate =
-			expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
+			expirationDate || new Date(new Date().getTime() + 1000 * 10);
 
 		// save token and data to localStorage
 		localStorage.setItem(
@@ -47,6 +48,7 @@ class AuthProvider extends React.Component {
 			JSON.stringify({
 				userId: userId,
 				token: token,
+				role: role,
 				expiration: tokenExpirationDate.toISOString(),
 			})
 		);
@@ -56,6 +58,7 @@ class AuthProvider extends React.Component {
 			isLoggedIn: true,
 			userId,
 			token,
+			role,
 			expiration: tokenExpirationDate.toISOString(),
 		});
 	}
@@ -66,6 +69,7 @@ class AuthProvider extends React.Component {
 			isLoggedIn: false,
 			userId: null,
 			token: null,
+			role: null,
 			expiration: null,
 		});
 	}
