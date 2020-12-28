@@ -47,7 +47,7 @@ class Header extends React.Component {
 											<button
 												type="button"
 												className="btn rounded btn-b-n navbar-toggle-box-collapse d-none d-md-block"
-												onClick={() => redirectTo("profile/history")}
+												onClick={() => redirectTo("/profile/aboutme")}
 											>
 												{/* <span className="fa fa-search" aria-hidden="true"></span> */}
 												Profile
