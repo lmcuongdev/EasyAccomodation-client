@@ -13,7 +13,6 @@ import PropertyDetail from "./components/details/PropertyDetail";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import Popup from "./components/popup/Popup";
-import FavoriteList from "./components/profile/FavoriteList";
 import Profile from "./components/profile/Profile";
 import NotFound from "./components/NotFound";
 import Rent from "./components/post/Rent";
@@ -64,8 +63,8 @@ class App extends Component {
 							<Route path="/property-detail/:id" component={PropertyDetail} />
 							<Route path="/profile/:page" component={Profile} exact />
 							<Route path="/rent" component={Rent} />
-							<Route exact path="/chat/:id/:id_sender" component={Chat} />
-							<Route path="/chat/:id_sender" component={Chat} />
+							<Route exact path="/chat/:id" component={Chat} />
+							<Route path="/chat" component={Chat} />
 							<Route component={NotFound} />
 						</Switch>
 					</div>

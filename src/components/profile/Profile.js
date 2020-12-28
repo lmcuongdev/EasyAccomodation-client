@@ -6,7 +6,8 @@ import ProfileSidebar from "./ProfileSidebar";
 import Property from "../accomodation/Property";
 import UserInfo from "./UserInfo";
 import ChangePassword from "./ChangePassword";
-import EditAccomod from "./EditAccomod";
+
+let data = JSON.parse(localStorage.userData);
 
 export class Profile extends Component {
 	constructor(props) {
@@ -25,10 +26,13 @@ export class Profile extends Component {
 	componentDidMount() {
 		axios
 			.get(
-				"https://easy-accommodation-api.herokuapp.com/api/users/5fdf13079ef978eafb549294"
+				`https://easy-accommodation-api.herokuapp.com/api/users/${data.userId}`
 			)
 			.then((res) => {
 				let user = res.data.user;
+				if (!user.owner_info) {
+					user.owner_info = {};
+				}
 				this.setState({
 					name: user.name,
 					email: user.email,
@@ -58,6 +62,7 @@ export class Profile extends Component {
 			case "aboutMe":
 				return (
 					<UserInfo
+						role={this.state.role}
 						name={this.state.name}
 						email={this.state.email}
 						address={this.state.address}

@@ -13,11 +13,16 @@ export class Chat extends Component {
 		this.state = {
 			mes_history: [],
 			receiverId: this.props.match.params.id,
-			senderId: this.props.match.params.id_sender,
+			senderId: null,
 		};
 	}
 
 	componentDidMount() {
+		let data = JSON.parse(localStorage.userData);
+		this.setState({ senderId: data.userId });
+
+		console.log(data);
+
 		axios
 			.get(`http://localhost:8080/messages/user/${this.state.senderId}`)
 			.then((res) => {
