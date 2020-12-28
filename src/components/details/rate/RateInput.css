@@ -6,7 +6,7 @@
 }
 
 .rating > input {
-	display: none;
+	display: none !important;
 }
 .rating > label:before {
 	margin: 5px;

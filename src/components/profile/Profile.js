@@ -7,11 +7,14 @@ import Property from "../accomodation/Property";
 import UserInfo from "./UserInfo";
 import ChangePassword from "./ChangePassword";
 
-let data = JSON.parse(localStorage.userData);
-
 export class Profile extends Component {
 	constructor(props) {
 		super(props);
+		this.data = {};
+		if (localStorage.userData) {
+			this.data = JSON.parse(localStorage.userData);
+		}
+
 		this.state = {
 			page: this.props.match.params.page,
 			name: null,
@@ -24,23 +27,26 @@ export class Profile extends Component {
 	}
 
 	componentDidMount() {
-		axios
-			.get(
-				`https://easy-accommodation-api.herokuapp.com/api/users/${data.userId}`
-			)
-			.then((res) => {
-				let user = res.data.user;
-				if (!user.owner_info) {
-					user.owner_info = {};
-				}
-				this.setState({
-					name: user.name,
-					email: user.email,
-					role: user.role,
-					address: user.owner_info.address,
-					phone: user.owner_info.phone,
+		if (this.data) {
+			axios
+				.get(
+					`https://easy-accommodation-api.herokuapp.com/api/users/${this.data.userId}`
+				)
+				.then((res) => {
+					let user = res.data.user;
+					if (!user.owner_info) {
+						user.owner_info = {};
+					}
+					console.log(user);
+					this.setState({
+						name: user.name,
+						email: user.email,
+						role: user.role,
+						address: user.owner_info.address,
+						phone: user.owner_info.phone,
+					});
 				});
-			});
+		}
 	}
 
 	changePage(name) {
@@ -59,7 +65,7 @@ export class Profile extends Component {
 
 	showPage() {
 		switch (this.state.page) {
-			case "aboutMe":
+			case "aboutme":
 				return (
 					<UserInfo
 						role={this.state.role}

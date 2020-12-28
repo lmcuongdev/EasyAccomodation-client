@@ -55,3 +55,8 @@ img {
 #container-content {
 	margin-top: 150px;
 }
+
+.btn:focus {
+	outline: none !important;
+	outline-offset: none !important;
+}

@@ -142,7 +142,7 @@ export class Rent_Accomod extends Component {
 								</div>
 							</div>
 							<PreviewImage />
-							<div>
+							<div className="finish">
 								<button
 									className="btn btn--radius-2 btn--red"
 									onClick={this.props.nextPage}

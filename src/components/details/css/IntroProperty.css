@@ -9,3 +9,9 @@
 	padding-right: 0;
 	padding-left: 0;
 } */
+
+.intro-single .interact-btn .liked {
+	color: #fff;
+	background-color: #dc3545;
+	border-color: #dc3545;
+}

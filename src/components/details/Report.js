@@ -46,9 +46,9 @@ export class Report extends Component {
 
 		return (
 			<div>
-				<button onClick={this.handleShow} className="btn btn-secondary btn-lg">
+				<label onClick={this.handleShow} className="btn btn-secondary btn-lg">
 					Report
-				</button>
+				</label>
 				<Modal
 					isOpen={this.state.show}
 					onRequestClose={this.handleClose}

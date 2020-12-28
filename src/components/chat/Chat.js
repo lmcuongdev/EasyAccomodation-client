@@ -10,19 +10,19 @@ import Search from "./Search";
 export class Chat extends Component {
 	constructor(props) {
 		super(props);
+		this.data = {};
+
+		if (localStorage.userData) {
+			this.data = JSON.parse(localStorage.userData);
+		}
 		this.state = {
 			mes_history: [],
 			receiverId: this.props.match.params.id,
-			senderId: null,
+			senderId: this.data.userId,
 		};
 	}
 
 	componentDidMount() {
-		let data = JSON.parse(localStorage.userData);
-		this.setState({ senderId: data.userId });
-
-		console.log(data);
-
 		axios
 			.get(`http://localhost:8080/messages/user/${this.state.senderId}`)
 			.then((res) => {

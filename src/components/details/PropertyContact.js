@@ -45,9 +45,9 @@ class PropertyContact extends React.Component {
 							)}
 						</div>
 					</div>
-					<div className="col-md-3">
+					{/* <div className="col-md-3">
 						<img src={Image} alt="" className="img-fluid" />
-					</div>
+					</div> */}
 				</div>
 			</div>
 		);

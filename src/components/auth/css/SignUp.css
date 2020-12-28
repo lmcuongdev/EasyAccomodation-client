@@ -262,11 +262,13 @@ h6 {
 }
 
 .bg-gra-01 {
-	background: -webkit-gradient(linear,
-			left bottom,
-			left top,
-			from(#fbc2eb),
-			to(#a18cd1));
+	background: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		from(#fbc2eb),
+		to(#a18cd1)
+	);
 	background: -webkit-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
 	background: -moz-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
 	background: -o-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
@@ -274,11 +276,13 @@ h6 {
 }
 
 .bg-gra-02 {
-	background: -webkit-gradient(linear,
-			left bottom,
-			right top,
-			from(#fc2c77),
-			to(#6c4079));
+	background: -webkit-gradient(
+		linear,
+		left bottom,
+		right top,
+		from(#fc2c77),
+		to(#6c4079)
+	);
 	background: -webkit-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
 	background: -moz-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
 	background: -o-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
@@ -286,11 +290,13 @@ h6 {
 }
 
 .bg-gra-03 {
-	background: -webkit-gradient(linear,
-			left bottom,
-			right top,
-			from(#08aeea),
-			to(#b721ff));
+	background: -webkit-gradient(
+		linear,
+		left bottom,
+		right top,
+		from(#08aeea),
+		to(#b721ff)
+	);
 	background: -webkit-linear-gradient(bottom left, #08aeea 0%, #b721ff 100%);
 	background: -moz-linear-gradient(bottom left, #08aeea 0%, #b721ff 100%);
 	background: -o-linear-gradient(bottom left, #08aeea 0%, #b721ff 100%);
@@ -446,6 +452,10 @@ select {
 	color: #555;
 }
 
+.line-height-sm {
+	line-height: 30px !important;
+}
+
 .input-group-desc {
 	position: relative;
 }
@@ -516,7 +526,10 @@ select {
 	background: transparent;
 }
 
-.rs-select2 .select2-container .select2-selection--single .select2-selection__rendered {
+.rs-select2
+	.select2-container
+	.select2-selection--single
+	.select2-selection__rendered {
 	line-height: 50px;
 	padding-left: 0;
 	color: #555;
@@ -526,7 +539,10 @@ select {
 	padding-right: 50px;
 }
 
-.rs-select2 .select2-container .select2-selection--single .select2-selection__arrow {
+.rs-select2
+	.select2-container
+	.select2-selection--single
+	.select2-selection__arrow {
 	height: 50px;
 	right: 15px;
 	display: -webkit-box;
@@ -546,11 +562,18 @@ select {
 	align-items: center;
 }
 
-.rs-select2 .select2-container .select2-selection--single .select2-selection__arrow b {
+.rs-select2
+	.select2-container
+	.select2-selection--single
+	.select2-selection__arrow
+	b {
 	display: none;
 }
 
-.rs-select2 .select2-container .select2-selection--single .select2-selection__arrow:after {
+.rs-select2
+	.select2-container
+	.select2-selection--single
+	.select2-selection__arrow:after {
 	font-family: "Material-Design-Iconic-Font";
 	content: "\f2f9";
 	font-size: 24px;
@@ -561,7 +584,10 @@ select {
 	transition: all 0.4s ease;
 }
 
-.rs-select2 .select2-container.select2-container--open .select2-selection--single .select2-selection__arrow::after {
+.rs-select2
+	.select2-container.select2-container--open
+	.select2-selection--single
+	.select2-selection__arrow::after {
 	-webkit-transform: rotate(-180deg);
 	-moz-transform: rotate(-180deg);
 	-ms-transform: rotate(-180deg);
@@ -635,11 +661,11 @@ select {
 	cursor: pointer;
 }
 
-.radio-container input:checked~.checkmark {
+.radio-container input:checked ~ .checkmark {
 	background-color: #e5e5e5;
 }
 
-.radio-container input:checked~.checkmark:after {
+.radio-container input:checked ~ .checkmark:after {
 	display: block;
 }
 
