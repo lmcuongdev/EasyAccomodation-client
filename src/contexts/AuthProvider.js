@@ -18,21 +18,37 @@ class AuthProvider extends React.Component {
 
 		this.logIn = this.logIn.bind(this);
 		this.logOut = this.logOut.bind(this);
-		this.componentDidMount = this.componentDidMount.bind(this);
+		this.componentWillMount = this.componentWillMount.bind(this);
+		// this.componentDidMount = this.componentDidMount.bind(this);
 		this.redirectTo = this.redirectTo.bind(this);
 	}
 
-	componentDidMount() {
+	componentWillMount() {
+		console.log("auth will mount");
 		const data = JSON.parse(localStorage.getItem("userData") || "{}");
 
 		if (data && data.token && new Date(data.expiration) > new Date()) {
 			this.logIn(data, new Date(data.expiration));
+			// console.log(this.state);
+		} else {
+			this.logOut();
+		}
+	}
+
+	componentDidMount() {
+		console.log("auth mount");
+		const data = JSON.parse(localStorage.getItem("userData") || "{}");
+
+		if (data && data.token && new Date(data.expiration) > new Date()) {
+			this.logIn(data, new Date(data.expiration));
+			// console.log(this.state);
 		} else {
 			this.logOut();
 		}
 	}
 
 	componentDidUpdate() {
+		console.log("auth update");
 		if (this.state.token && this.state.expiration) {
 			const remainingTime =
 				this.state.expiration.getTime() - new Date().getTime();

@@ -51,9 +51,7 @@ class PropertyDetail extends React.Component {
 
 	componentDidMount() {
 		axios
-			.get(
-				`https://easy-accommodation-api.herokuapp.com/api/accommodations/${this.state.id}`
-			)
+			.get(`${process.env.REACT_APP_API_URL}/accommodations/${this.state.id}`)
 			.then((res) => {
 				const data = res.data.accommodation;
 				this.setState({

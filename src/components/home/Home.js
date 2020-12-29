@@ -11,7 +11,7 @@ class Home extends React.Component {
 		return (
 			<div className="container">
 				<Search />
-				<Property orientation="vertical" />
+				<Property orientation="vertical" all={true} />
 				<AboutUs />
 			</div>
 		);

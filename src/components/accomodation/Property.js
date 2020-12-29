@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import AuthContext from "../../contexts/AuthContext";
 
 import "./css/Property.css";
 
@@ -7,11 +8,16 @@ import PropertyItemHorizontal from "./PropertyItemHorizontal";
 import PropertyItem from "./PropertyItem";
 
 class Property extends React.Component {
+	static contextType = AuthContext;
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			accomod_list: [],
+			alert: null,
 		};
+
+		this.handleRemove = this.handleRemove.bind(this);
 	}
 
 	orientateItem() {
@@ -34,27 +40,17 @@ class Property extends React.Component {
 				});
 			case "horizontal":
 				if (this.props.myAccomod) {
-					return [
-						<PropertyItemHorizontal myAccomod={this.props.myAccomod} />,
+					return this.state.accomod_list.map((item, index) => (
 						<PropertyItemHorizontal
+							key={index}
+							accommod={item}
 							myAccomod={this.props.myAccomod}
-							isVerified={true}
+							isVerified={item.is_verified}
 							editable={false}
 							sendRequest={this.state.sendRequest}
-						/>,
-						<PropertyItemHorizontal
-							myAccomod={this.props.myAccomod}
-							isVerified={true}
-							editable={false}
-							sendRequest={this.state.sendRequest}
-						/>,
-						<PropertyItemHorizontal
-							myAccomod={this.props.myAccomod}
-							isVerified={true}
-							editable={false}
-							sendRequest={this.state.sendRequest}
-						/>,
-					];
+							handleRemove={this.handleRemove}
+						/>
+					));
 				} else {
 					return [
 						<PropertyItemHorizontal is_available="true" />,
@@ -67,34 +63,76 @@ class Property extends React.Component {
 		}
 	}
 
-	componentDidMount() {
-		axios
-			.get("https://easy-accommodation-api.herokuapp.com/api/accommodations")
+	handleRemove(id) {
+		axios({
+			method: "DELETE",
+			url: `${process.env.REACT_APP_API_URL}/accommodations/${id}`,
+			headers: { Authorization: `Bearer ${this.context.state.token}` },
+		})
 			.then((res) => {
-				const data = res.data.accommodations;
-				this.setState({ accomod_list: data });
+				this.setState((prev) => ({
+					...prev,
+					accomod_list: prev.accomod_list.filter((item) => item._id !== id),
+				}));
+			})
+			.catch((err) => {
+				this.setState({
+					alert: { message: err.response?.data.message, type: "danger" },
+				});
 			});
+	}
+
+	componentDidMount() {
+		// check if this component should
+		// load data of this owner
+		if (this.props.myAccomod) {
+			console.log(this.context.state.userId);
+			console.log(this.context.state.token);
+			axios
+				.get(
+					`${process.env.REACT_APP_API_URL}/users/${this.context.state.userId}/accommodations`,
+					{ headers: { Authorization: `Bearer ${this.context.state.token}` } }
+				)
+				.then((resp) => {
+					this.setState({ accomod_list: resp.data.accommodations });
+				})
+				.catch((err) => {
+					this.setState({ error: err.response?.data.message });
+				});
+		}
+		// load all accommod
+		if (this.props.all) {
+			axios
+				.get(`${process.env.REACT_APP_API_URL}/accommodations`)
+				.then((res) => {
+					const data = res.data.accommodations;
+					this.setState({ accomod_list: data });
+				});
+		}
 	}
 
 	render() {
 		return (
-			<section id="aa-latest-property">
-				<div className="container">
-					<div className="aa-latest-property-area">
-						<div className="aa-title">
-							<h2>Latest Properties</h2>
-							<span></span>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum
-								sit ea nobis quae vero voluptatibus.
-							</p>
+			<>
+				<div className="row">
+					{this.state.alert && (
+						<div className={`alert alert-${this.state.alert.type}`}>
+							{this.state.alert.message}
 						</div>
-						<div className="aa-latest-properties-content">
-							<div className="row">{this.orientateItem()}</div>
-						</div>
-					</div>
+					)}
+					{this.orientateItem()}
 				</div>
-			</section>
+			</>
+			// <section id="aa-latest-property">
+			// 	<div className="container">
+			// 		<div className="aa-latest-property-area">
+			// 			<div className="aa-title alert alert-danger">dsa</div>
+			// 			<div className="aa-latest-properties-content">
+			// 				<div className="row">{this.orientateItem()}</div>
+			// 			</div>
+			// 		</div>
+			// 	</div>
+			// </section>
 		);
 	}
 }
