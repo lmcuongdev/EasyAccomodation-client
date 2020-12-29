@@ -18,6 +18,7 @@ export class Chat extends Component {
 		this.state = {
 			mes_history: [],
 			receiverId: this.props.match.params.id,
+			name: "abc",
 			senderId: this.data.userId,
 		};
 	}
@@ -43,6 +44,14 @@ export class Chat extends Component {
 					}
 				}
 				this.setState({ mes_history });
+			});
+
+		axios
+			.get(
+				`${process.env.REACT_APP_API_URL}/users/${this.props.match.params.id}`
+			)
+			.then((res) => {
+				this.setState({ name: res.data.user.name });
 			});
 	}
 
@@ -79,6 +88,7 @@ export class Chat extends Component {
 						setMessageHistory={this.setMessageHistory}
 						receiverId={this.state.receiverId}
 						senderId={this.state.senderId}
+						name={this.state.name}
 					/>
 				) : null}
 			</div>

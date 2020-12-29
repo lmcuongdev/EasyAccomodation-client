@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { Component } from "react";
 import RateInput from "../rate/RateInput";
 
@@ -6,19 +7,17 @@ export class CommentInput extends Component {
 		super(props);
 		this.state = {
 			rating: 0,
-			content: "",
+			comment: "",
 		};
 
 		this.handleChange = this.handleChange.bind(this);
-		this.handleClick = this.handleClick.bind(this);
 	}
 
 	handleChange(event) {
-		this.setState({ [event.target.name]: event.target.value });
-	}
+		let { name, value } = event.target;
 
-	handleClick() {
-		console.log(this.state);
+		if (name === "rating") value = Number(value);
+		this.setState({ [name]: value });
 	}
 
 	render() {
@@ -36,15 +35,23 @@ export class CommentInput extends Component {
 							<RateInput handleChange={this.handleChange} />
 							<div className="form-group">
 								<textarea
-									className="form-control"
+									className={`form-control ${
+										this.props.alert && "border border-" + this.props.alert.type
+									}`}
 									placeholder="Comment *"
-									name="content"
-									value={this.state.content}
+									name="comment"
+									value={this.state.comment}
 									onChange={this.handleChange}
 									rows="6"
 								></textarea>
 							</div>
-							<button className="btn btn-primary" onClick={this.handleClick}>
+							<button
+								className="btn btn-primary"
+								onClick={() => {
+									this.setState({ rating: 0, comment: "" });
+									this.props.submitReview(this.state);
+								}}
+							>
 								Send Message
 							</button>
 						</div>

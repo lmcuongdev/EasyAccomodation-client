@@ -41,7 +41,7 @@ class Home extends React.Component {
 					all={true}
 					condition={this.state.condition}
 				/>
-				<AboutUs />
+				{/* <AboutUs /> */}
 			</div>
 		);
 	}

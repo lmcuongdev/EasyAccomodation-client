@@ -40,6 +40,7 @@ class PropertyDetail extends React.Component {
 			ownerId: null,
 			phone: "Phone",
 			title: "Title",
+			images: [],
 		};
 	}
 
@@ -50,6 +51,10 @@ class PropertyDetail extends React.Component {
 	};
 
 	componentDidMount() {
+		axios.get(
+			`${process.env.REACT_APP_API_URL}/accommodations/${this.state.id}/addView`
+		);
+
 		axios
 			.get(`${process.env.REACT_APP_API_URL}/accommodations/${this.state.id}`)
 			.then((res) => {
@@ -76,6 +81,7 @@ class PropertyDetail extends React.Component {
 					ownerId: data.owner,
 					phone: data.phone,
 					title: data.title,
+					images: data.images,
 				});
 			});
 	}
@@ -85,7 +91,7 @@ class PropertyDetail extends React.Component {
 			<section className="property-single nav-arrow-b container">
 				<div className="container">
 					<div className="row">
-						<PropertySlider />
+						<PropertySlider images={this.state.images} />
 						<section className="intro-single">
 							<div className="title-single-box">
 								<div class="interact-btn">

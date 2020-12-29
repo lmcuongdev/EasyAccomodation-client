@@ -28,6 +28,8 @@ import Sidebar from "../components/Sidebar/Sidebar.js";
 import Image from "../../images/logo512.png";
 
 import routes from "../routes";
+import Profile from "../views/examples/Profile.js";
+import Accommodation from "../views/examples/Accommodation";
 
 class Admin extends React.Component {
 	componentDidUpdate(e) {
@@ -35,19 +37,21 @@ class Admin extends React.Component {
 		document.scrollingElement.scrollTop = 0;
 		this.refs.mainContent.scrollTop = 0;
 	}
+
 	getRoutes = (routes) => {
 		return routes.map((prop, key) => {
-			if (prop.layout === "/admin") {
-				return (
-					<Route
-						path={prop.layout + prop.path}
-						component={prop.component}
-						key={key}
-					/>
-				);
-			} else {
-				return null;
-			}
+			// if (prop.layout === "/admin") {
+			return (
+				<Route
+					path={prop.layout + prop.path}
+					component={prop.component}
+					key={key}
+					exact
+				/>
+			);
+			// } else {
+			// 	return null;
+			// }
 		});
 	};
 	getBrandText = (path) => {
@@ -80,6 +84,7 @@ class Admin extends React.Component {
 					/>
 					<Switch>
 						{this.getRoutes(routes)}
+						<Route path="/admin/accommodations/:id" component={Accommodation} />
 						<Redirect from="*" to="/admin/index" />
 					</Switch>
 					<Container fluid>
