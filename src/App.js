@@ -31,6 +31,7 @@ import AdminLayout from "./admin/layouts/Admin";
 import AuthLayout from "./admin/layouts/Auth";
 
 import AuthProvider from "./contexts/AuthProvider";
+import Navbar from "./components/navbar/NavbarRB";
 class App extends Component {
 	constructor() {
 		super();
@@ -79,7 +80,7 @@ class App extends Component {
 						</Switch>
 					) : (
 						<>
-							<Header openPopup={this.openPopup} />
+							<Navbar openPopup={this.openPopup} />
 							<Popup
 								popupState={this.state.popupState}
 								handleClose={this.closePopup}

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { toEng } from "../Convert";
 import AuthContext from "../../contexts/AuthContext";
 
 import "./css/Property.css";
@@ -20,24 +21,47 @@ class Property extends React.Component {
 		this.handleRemove = this.handleRemove.bind(this);
 	}
 
+	isEmpty = (inputObject) => {
+		return Object.keys(inputObject).length === 0;
+	};
+
 	orientateItem() {
 		switch (this.props.orientation) {
 			case "vertical":
-				return this.state.accomod_list.map((item) => {
-					return (
-						<PropertyItem
-							_id={item._id}
-							title={item.title}
-							description={item.description}
-							number_of_room={item.number_of_room}
-							price={item.price}
-							is_available={item.is_available}
-							ward={item.ward}
-							district={item.district}
-							area={item.area}
-						/>
-					);
-				});
+				return this.state.accomod_list
+					.filter((item) => {
+						if (!this.isEmpty(this.props.condition)) {
+							let condition = this.props.condition;
+							return (
+								(toEng(item.description.toLowerCase()).includes(
+									condition.search_text
+								) ||
+									toEng(item.title.toLowerCase()).includes(
+										condition.search_text
+									)) &&
+								item.type.includes(condition.type) &&
+								item.area >= parseInt(condition.size) &&
+								item.price >= parseInt(condition.minValue) &&
+								item.price <= parseInt(condition.maxValue)
+							);
+						}
+						return true;
+					})
+					.map((item) => {
+						return (
+							<PropertyItem
+								_id={item._id}
+								title={item.title}
+								description={item.description}
+								number_of_room={item.number_of_room}
+								price={item.price}
+								is_available={item.is_available}
+								ward={item.ward}
+								district={item.district}
+								area={item.area}
+							/>
+						);
+					});
 			case "horizontal":
 				if (this.props.myAccomod) {
 					return this.state.accomod_list.map((item, index) => (
@@ -109,6 +133,14 @@ class Property extends React.Component {
 					this.setState({ accomod_list: data });
 				});
 		}
+
+		// if (this.condition) {
+		// 	if (this.condition.order) {
+		// 		this.sortByPriceAsc();
+		// 	} else {
+		// 		this.sortByPriceAsc();
+		// 	}
+		// }
 	}
 
 	render() {

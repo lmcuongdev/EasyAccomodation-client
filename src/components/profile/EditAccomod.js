@@ -6,7 +6,7 @@ export class EditAccomod extends Component {
 			<div class="wrapper wrapper--w790">
 				<div class="card card-5">
 					<div class="card-heading">
-						<h2 class="title">Thong tin nha tro</h2>
+						<h2 class="title">Day la trang fake</h2>
 					</div>
 					<div class="card-body" style={{ paddingTop: "0" }}>
 						<form method="POST">
