@@ -55,6 +55,7 @@ class Reviews extends React.Component {
 				console.log(res.data.reviews);
 				this.setState({
 					Reviews: res.data.reviews.map((item) => ({
+						...item,
 						name: item.accommodation?.title,
 						comment: item.comment,
 						status: item.status,
@@ -64,6 +65,24 @@ class Reviews extends React.Component {
 						approved: true,
 					})),
 				});
+			});
+	};
+
+	updateChange = (id) => {
+		axios
+			.put(
+				`${process.env.REACT_APP_API_URL}/reviews/${id}`,
+				{ ...this.state },
+				{
+					headers: { Authorization: `Bearer ${this.context.state.token}` },
+				}
+			)
+			.then((res) => {
+				console.log("updated");
+				// var item = res.data.accommodation;
+				// this.setState({
+				// 	...item,
+				// });
 			});
 	};
 
@@ -161,7 +180,12 @@ class Reviews extends React.Component {
 							<i className="fas fa-ellipsis-v" />
 						</DropdownToggle>
 						<DropdownMenu className="dropdown-menu-arrow" right>
-							<DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+							<DropdownItem
+								onClick={(e) => {
+									e.preventDefault();
+									this.updateChange(item._id);
+								}}
+							>
 								Action
 							</DropdownItem>
 							<DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
@@ -204,7 +228,7 @@ class Reviews extends React.Component {
 		return mapPaging;
 	};
 
-	render() {
+	render = () => {
 		return (
 			<>
 				<Header />
@@ -313,7 +337,7 @@ class Reviews extends React.Component {
 				</Container>
 			</>
 		);
-	}
+	};
 }
 
 export default Reviews;

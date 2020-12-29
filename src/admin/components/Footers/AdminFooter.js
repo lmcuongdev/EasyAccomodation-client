@@ -18,7 +18,7 @@ class Footer extends React.Component {
 								rel="noopener noreferrer"
 								target="_blank"
 							>
-								Phan Đức
+								{/* Phan Đức */}
 							</a>
 						</div>
 					</Col>
@@ -31,7 +31,7 @@ class Footer extends React.Component {
 									rel="noopener noreferrer"
 									target="_blank"
 								>
-									Creative Tim
+									{/* Creative Tim */}
 								</NavLink>
 							</NavItem>
 
@@ -41,7 +41,7 @@ class Footer extends React.Component {
 									rel="noopener noreferrer"
 									target="_blank"
 								>
-									About Us
+									{/* About Us */}
 								</NavLink>
 							</NavItem>
 						</Nav>

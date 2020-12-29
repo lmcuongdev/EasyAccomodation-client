@@ -72,17 +72,14 @@ class Property extends React.Component {
 							key={index}
 							accommod={item}
 							myAccomod={this.props.myAccomod}
-							isVerified={item.is_verified}
+							isVerified={item.status !== "pending"}
 							editable={false}
 							sendRequest={this.state.sendRequest}
 							handleRemove={this.handleRemove}
 						/>
 					));
 				} else {
-					return [
-						<PropertyItemHorizontal is_available="true" />,
-						<PropertyItemHorizontal />,
-					];
+					return [];
 				}
 
 			default:

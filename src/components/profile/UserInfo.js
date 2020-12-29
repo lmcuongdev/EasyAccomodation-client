@@ -72,7 +72,12 @@ export class UserInfo extends Component {
 							) : null}
 
 							<div className="finish">
-								<button className="btn btn--radius-2 btn--red">Update</button>
+								<button
+									className="btn btn--radius-2 btn--red"
+									onClick={(e) => e.preventDefault()}
+								>
+									Update
+								</button>
 							</div>
 						</form>
 					</div>

@@ -88,13 +88,15 @@ export class PropertyItemHorizontal extends Component {
 								</>
 							)}
 						</div>
-						<h5 className="mt-0 font-weight-bold mb-2">{this.props.name}</h5>
+						<h5 className="mt-0 font-weight-bold mb-2">
+							{this.props.accommod.title}
+						</h5>
 						<p className="font-italic text-muted mb-0 small">
-							{/* {this.props.accommod.description} */}Temp description
+							{this.props.accommod.description}
 						</p>
 						<div className="d-flex align-items-center justify-content-between mt-1">
 							<h6 className="font-weight-bold my-2">
-								{/* {this.props.accommod.price} */}Temp price
+								{this.props.accommod.price}
 							</h6>
 							{this.checkEditingRequest()}
 							{/* <ul className="list-inline small">
@@ -123,7 +125,7 @@ export class PropertyItemHorizontal extends Component {
 						) : null}
 					</div>
 					<img
-						src="https://res.cloudinary.com/mhmd/image/upload/v1556485076/shoes-1_gthops.jpg"
+						src={this.props.accommod?.images[0]}
 						alt="Generic placeholder image"
 						width="200"
 						className="ml-lg-5 order-1 order-lg-2"

@@ -23,34 +23,42 @@ class Icons extends React.Component {
 	};
 
 	componentDidMount = () => {
-		axios
-			.get("https://easy-accommodation-api.herokuapp.com/api/users")
-			.then((res) => {
-				this.setState((prev) => ({
-					rentersList: res.data.users.map((item) => ({
-						avatar: "",
-						name: (item.role = "owner" ? item.name : "renters"),
-						rentersPage: "user-profile",
+		axios.get(`${process.env.REACT_APP_API_URL}/users`).then((res) => {
+			console.log(res.data.users);
+			this.setState((prev) => ({
+				rentersList: res.data.users
+					.filter((item) => {
+						if (item.role !== "owner") return false;
+						return true;
+					})
+					.map((item) => ({
+						// avatar: "",
+						id: item._id,
+						email: item.email,
+						rentersPage: "users",
 					})),
-				}));
-			});
+			}));
+		});
 	};
 
 	renderRenters = () => {
 		const data = this.state.rentersList;
 
-		const mapRenters = data.map((item, index) => (
-			<Col lg="3" md="6" key={index}>
-				<a href={item.rentersPage}>
-					<button className=" btn-icon-clipboard" type="button">
-						<div>
-							<img alt="..." src={Image} className="avatar rounded-circle" />
-							<span>{item.name}</span>
-						</div>
-					</button>
-				</a>
-			</Col>
-		));
+		const mapRenters = data.map((item, index) => {
+			console.log(item);
+			return (
+				<Col lg="3" md="6" key={index}>
+					<a href={`users/${item.id}`}>
+						<button className=" btn-icon-clipboard" type="button">
+							<div>
+								{/* <img alt="..." src={Image} className="avatar rounded-circle" /> */}
+								<span className="font-weight-bold">{item.email}</span>
+							</div>
+						</button>
+					</a>
+				</Col>
+			);
+		});
 		return mapRenters;
 	};
 

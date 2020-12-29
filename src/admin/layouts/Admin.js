@@ -85,6 +85,7 @@ class Admin extends React.Component {
 					<Switch>
 						{this.getRoutes(routes)}
 						<Route path="/admin/accommodations/:id" component={Accommodation} />
+						<Route path="/admin/users/:id" component={Profile} />
 						<Redirect from="*" to="/admin/index" />
 					</Switch>
 					<Container fluid>

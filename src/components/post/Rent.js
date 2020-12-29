@@ -98,7 +98,7 @@ export class Rent extends Component {
 				this.context.redirectTo("/");
 			})
 			.catch((err) => {
-				this.setState({ error: err.response.data.message });
+				this.setState({ error: err.response?.data?.message });
 			});
 	}
 

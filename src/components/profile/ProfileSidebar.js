@@ -38,15 +38,23 @@ export class ProfileSidebar extends Component {
 									this.handleClick("profile/aboutme");
 								}}
 							>
-								<span>About Me</span>
+								<span>Info</span>
 							</li>
-							<li
+							{/* <li
 								className={this.props.page !== "favorite" || "bg-primary"}
 								onClick={() => {
 									this.handleClick("profile/favorite");
 								}}
 							>
 								<span>Favorite Accomod</span>
+							</li> */}
+							<li
+								className={this.props.page !== "changepassword" || "bg-primary"}
+								onClick={() => {
+									this.handleClick("profile/changepassword");
+								}}
+							>
+								<span>Change Password</span>
 							</li>
 							{this.props.role === "owner" && (
 								<>
@@ -70,14 +78,6 @@ export class ProfileSidebar extends Component {
 									</li>
 								</>
 							)}
-							<li
-								className={this.props.page !== "changepassword" || "bg-primary"}
-								onClick={() => {
-									this.handleClick("profile/changepassword");
-								}}
-							>
-								<span>Change Password</span>
-							</li>
 						</ul>
 					</nav>
 				</div>

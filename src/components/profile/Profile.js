@@ -83,8 +83,8 @@ export class Profile extends Component {
 				return <ChangePassword />;
 			case "my-accommod":
 				return <Property orientation="horizontal" myAccomod={true} />;
-			case "favorite":
-				return <Property orientation="horizontal" />;
+			// case "favorite":
+			// 	return <Property orientation="horizontal" />;
 			default:
 				this.context.redirectTo("/profile");
 				break;
