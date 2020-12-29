@@ -18,6 +18,8 @@ class Property extends React.Component {
 		};
 
 		this.handleRemove = this.handleRemove.bind(this);
+		this.fetchMyAccommod = this.fetchMyAccommod.bind(this);
+		this.fetchAll = this.fetchAll.bind(this);
 	}
 
 	orientateItem() {
@@ -82,32 +84,42 @@ class Property extends React.Component {
 			});
 	}
 
+	fetchMyAccommod() {
+		axios
+			.get(
+				`${process.env.REACT_APP_API_URL}/users/${this.context.state.userId}/accommodations`,
+				{ headers: { Authorization: `Bearer ${this.context.state.token}` } }
+			)
+			.then((resp) => {
+				this.setState({ accomod_list: resp.data.accommodations });
+			})
+			.catch((err) => {
+				this.setState({ error: err.response?.data.message });
+			});
+	}
+
+	fetchAll() {
+		axios.get(`${process.env.REACT_APP_API_URL}/accommodations`).then((res) => {
+			const data = res.data.accommodations;
+			this.setState({ accomod_list: data });
+		});
+	}
+
 	componentDidMount() {
 		// check if this component should
 		// load data of this owner
 		if (this.props.myAccomod) {
-			console.log(this.context.state.userId);
-			console.log(this.context.state.token);
-			axios
-				.get(
-					`${process.env.REACT_APP_API_URL}/users/${this.context.state.userId}/accommodations`,
-					{ headers: { Authorization: `Bearer ${this.context.state.token}` } }
-				)
-				.then((resp) => {
-					this.setState({ accomod_list: resp.data.accommodations });
-				})
-				.catch((err) => {
-					this.setState({ error: err.response?.data.message });
-				});
+			this.fetchMyAccommod();
 		}
 		// load all accommod
-		if (this.props.all) {
-			axios
-				.get(`${process.env.REACT_APP_API_URL}/accommodations`)
-				.then((res) => {
-					const data = res.data.accommodations;
-					this.setState({ accomod_list: data });
-				});
+		else if (this.props.all) {
+			this.fetchAll();
+		}
+	}
+
+	componentDidUpdate(prevProps) {
+		if (!prevProps.myAccomod && this.props.myAccomod) {
+			this.fetchMyAccommod();
 		}
 	}
 

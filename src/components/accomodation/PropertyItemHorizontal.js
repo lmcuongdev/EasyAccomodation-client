@@ -73,7 +73,7 @@ export class PropertyItemHorizontal extends Component {
 											</button>
 										</>
 									) : (
-										<button>
+										<>
 											<h2 className="btn btn-secondary btn-sm">Pending</h2>
 											<button
 												className="btn btn-danger btn-sm"
@@ -83,7 +83,7 @@ export class PropertyItemHorizontal extends Component {
 											>
 												Remove
 											</button>
-										</button>
+										</>
 									)}
 								</>
 							)}

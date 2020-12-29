@@ -66,6 +66,7 @@ export class Profile extends Component {
 	}
 
 	showPage() {
+		console.log(this.props.match.params.page.toLowerCase());
 		switch (this.props.match.params.page.toLowerCase()) {
 			case "aboutme":
 				return (
