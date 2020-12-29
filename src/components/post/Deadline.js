@@ -29,11 +29,19 @@ export class Deadline extends Component {
 	minDate() {
 		let currentDate = new Date();
 		currentDate.setDate(currentDate.getDate() + 7);
-		let result = `${currentDate.getFullYear()}-${
+		let result = `${currentDate.getFullYear()}-${this.format(
 			currentDate.getMonth() + 1
-		}-${currentDate.getDate()}`;
+		)}-${this.format(currentDate.getDate())}`;
+		console.log(result);
 		return result;
 	}
+
+	format = (value) => {
+		if (value.toString().length === 1) {
+			return `0${value}`;
+		}
+		return value.toString();
+	};
 
 	render() {
 		return (

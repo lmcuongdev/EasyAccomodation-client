@@ -4,6 +4,7 @@ import Rent_Address from "./Rent_Address";
 import Rent_Contact from "./Rent_Contact";
 import axios from "axios";
 import AuthContext from "../../contexts/AuthContext";
+import Deadline from "./Deadline";
 export class Rent extends Component {
 	static contextType = AuthContext;
 
@@ -251,6 +252,20 @@ export class Rent extends Component {
 									</div>
 								</section>
 								<div className="form-row">
+									<div className="name">Title</div>
+									<div className="value">
+										<div className="input-group">
+											<input
+												value={this.state.title}
+												onChange={this.handleChange}
+												className="input--style-5"
+												type="text"
+												name="title"
+											/>
+										</div>
+									</div>
+								</div>
+								<div className="form-row">
 									<div className="name">Loai phong</div>
 									<div className="value">
 										<div className="input-group">
@@ -482,6 +497,12 @@ export class Rent extends Component {
 												name="phone"
 											/>
 										</div>
+									</div>
+								</div>
+								<div className="form-row">
+									<div className="name">Thoi han dang bai</div>
+									<div className="value">
+										<Deadline />
 									</div>
 								</div>
 							</div>
