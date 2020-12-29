@@ -34,7 +34,7 @@ export class PropertyItemHorizontal extends Component {
 				}
 			} else {
 				return (
-					<Link to="/">
+					<Link to={`/property-detail/${this.props.accommod._id}/edit`}>
 						Chỉnh sửa bài viết <i class="fa fa-arrow-right"></i>
 					</Link>
 				);
@@ -46,8 +46,8 @@ export class PropertyItemHorizontal extends Component {
 		return (
 			<li className="list-group-item">
 				<div className="media align-items-lg-center flex-column flex-lg-row p-3">
-					<div className="media-body order-2 order-lg-1">
-						<div style={{ float: "right" }}>
+					<div className="media-body order-2 order-lg-1 pr-5">
+						<div className="float-right">
 							{!this.props.myAccomod ? (
 								<>
 									{!this.props.is_available ? (
@@ -73,20 +73,29 @@ export class PropertyItemHorizontal extends Component {
 											</button>
 										</>
 									) : (
-										<>
-											<button className="btn btn-secondary btn-sm">
-												Pending
+										<button>
+											<h2 className="btn btn-secondary btn-sm">Pending</h2>
+											<button
+												className="btn btn-danger btn-sm"
+												onClick={() =>
+													this.props.handleRemove(this.props.accommod._id)
+												}
+											>
+												Remove
 											</button>
-											<button className="btn btn-danger btn-sm">Remove</button>
-										</>
+										</button>
 									)}
 								</>
 							)}
 						</div>
 						<h5 className="mt-0 font-weight-bold mb-2">{this.props.name}</h5>
-						<p className="font-italic text-muted mb-0 small">Nha tro gan VNU</p>
+						<p className="font-italic text-muted mb-0 small">
+							{/* {this.props.accommod.description} */}Temp description
+						</p>
 						<div className="d-flex align-items-center justify-content-between mt-1">
-							<h6 className="font-weight-bold my-2">$120.00</h6>
+							<h6 className="font-weight-bold my-2">
+								{/* {this.props.accommod.price} */}Temp price
+							</h6>
 							{this.checkEditingRequest()}
 							{/* <ul className="list-inline small">
 								<li className="list-inline-item m-0">

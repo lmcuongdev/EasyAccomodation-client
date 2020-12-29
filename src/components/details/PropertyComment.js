@@ -14,7 +14,7 @@ export class PropertyComment extends Component {
 	componentDidMount() {
 		axios
 			.get(
-				`https://easy-accommodation-api.herokuapp.com/api/accommodations/${this.props.id}/reviews`
+				`${process.env.REACT_APP_API_URL}/accommodations/${this.props.id}/reviews`
 			)
 			.then((res) => {
 				const data = res.data.reviews;

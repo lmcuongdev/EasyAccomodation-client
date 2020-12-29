@@ -41,7 +41,7 @@ class SignIn extends React.Component {
 	}
 
 	render() {
-		return !this.context.isLoggedIn ? (
+		return !this.context.state.isLoggedIn ? (
 			<div className="page-wrapper p-t-45 p-b-50">
 				<div className="wrapper wrapper--w790">
 					{this.state.error && (

@@ -13,7 +13,6 @@ class Search extends React.Component {
 							type="text"
 							class="form-control "
 							placeholder="Search expense"
-							value=""
 						/>
 					</div>
 					<div class="form-group col-md-2">

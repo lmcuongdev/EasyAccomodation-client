@@ -23,10 +23,9 @@ export class Rent_Address extends Component {
 								<div className="value">
 									<div className="input-group">
 										<select name="city" className="input--style-5">
-											<option disabled>Choose option</option>
-											<option value="city_1">City 1</option>
-											<option value="city_2">City 2</option>
-											<option value="city_3">City 3</option>
+											<option value="hanoi">Ha Noi</option>
+											<option value="saigon">Sai Gon</option>
+											<option value="hungyen">Hung Yen</option>
 										</select>
 									</div>
 								</div>
@@ -36,10 +35,9 @@ export class Rent_Address extends Component {
 								<div className="value">
 									<div className="input-group">
 										<select name="subject" className="input--style-5">
-											<option disabled>Choose option</option>
-											<option>Subject 1</option>
-											<option>Subject 2</option>
-											<option>Subject 3</option>
+											<option>Cau Giay</option>
+											<option>Dong Da</option>
+											<option>Thanh Xuân</option>
 										</select>
 									</div>
 								</div>

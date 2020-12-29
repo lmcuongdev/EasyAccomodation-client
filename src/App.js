@@ -6,7 +6,12 @@ import React, { Component } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+} from "react-router-dom";
 
 import Home from "./components/home/Home";
 import PropertyDetail from "./components/details/PropertyDetail";
@@ -31,7 +36,7 @@ class App extends Component {
 		super();
 		this.state = {
 			popupState: "close",
-			adminPage: true,
+			adminPage: false,
 		};
 
 		this.openPopup = this.openPopup.bind(this);
@@ -69,6 +74,8 @@ class App extends Component {
 								render={(props) => <AuthLayout {...props} />}
 							/>
 							{/* <Redirect from="/" to="/admin/index" /> */}
+
+							<Route component={NotFound} />
 						</Switch>
 					) : (
 						<>
@@ -81,12 +88,20 @@ class App extends Component {
 								<Switch>
 									<Route path="/" exact component={Home} />
 									<Route path="/sign-in" component={SignIn} exact />
-									<Route path="/sign-up" component={SignUp} />
+									<Route path="/sign-up" component={SignUp} exact />
+									<Route
+										path="/property-detail/:id/edit"
+										render={(props) => <Rent edit={true} {...props} />}
+									/>
 									<Route
 										path="/property-detail/:id"
 										component={PropertyDetail}
 									/>
-									<Route path="/profile/:page" component={Profile} exact />
+									<Route path="/profile/:page" component={Profile} />
+									<Route
+										path="/profile"
+										component={() => <Redirect to="/profile/aboutme" />}
+									/>
 									<Route path="/rent" component={Rent} />
 									<Route exact path="/chat/:id" component={Chat} />
 									<Route path="/chat" component={Chat} />

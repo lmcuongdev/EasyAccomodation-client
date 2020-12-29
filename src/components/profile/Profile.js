@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import AuthContext from "../../contexts/AuthContext";
 
 import "./Profile.css";
 import ProfileSidebar from "./ProfileSidebar";
@@ -8,6 +9,8 @@ import UserInfo from "./UserInfo";
 import ChangePassword from "./ChangePassword";
 
 export class Profile extends Component {
+	static contextType = AuthContext;
+
 	constructor(props) {
 		super(props);
 		this.data = {};
@@ -16,7 +19,7 @@ export class Profile extends Component {
 		}
 
 		this.state = {
-			page: this.props.match.params.page,
+			page: this.props.match.params.page.toLowerCase(),
 			name: null,
 			email: null,
 			role: null,
@@ -27,44 +30,43 @@ export class Profile extends Component {
 	}
 
 	componentDidMount() {
-		if (this.data) {
-			axios
-				.get(
-					`https://easy-accommodation-api.herokuapp.com/api/users/${this.data.userId}`
-				)
-				.then((res) => {
-					let user = res.data.user;
-					if (!user.owner_info) {
-						user.owner_info = {};
-					}
-					console.log(user);
-					this.setState({
-						name: user.name,
-						email: user.email,
-						role: user.role,
-						address: user.owner_info.address,
-						phone: user.owner_info.phone,
-					});
+		console.log("profile mount");
+		axios
+			.get(
+				`${process.env.REACT_APP_API_URL}/users/${this.context?.state?.userId}`
+			)
+			.then((res) => {
+				let user = res.data.user;
+				this.setState({
+					name: user.name,
+					email: user.email,
+					role: user.role,
+					address: user.owner_info?.address,
+					phone: user.owner_info?.phone,
 				});
-		}
+			});
 	}
 
 	changePage(name) {
-		this.setState((prev) => ({ ...prev, page: name }));
+		this.setState((prev) => ({ ...prev, page: name.toLowerCase() }));
 	}
 
 	handleChange = (event) => {
 		this.setState({ [event.target.name]: event.target.value });
 	};
 
-	componentDidUpdate() {
-		if (this.state.page !== this.props.match.params.page) {
-			this.setState({ page: this.props.match.params.page });
+	componentDidUpdate(prevProps, prevState) {
+		// console.log(prevProps, prevState);
+		if (
+			this.state.page.toLowerCase() !==
+			this.props.match.params.page.toLowerCase()
+		) {
+			this.setState({ page: this.props.match.params.page.toLowerCase() });
 		}
 	}
 
 	showPage() {
-		switch (this.state.page) {
+		switch (this.props.match.params.page.toLowerCase()) {
 			case "aboutme":
 				return (
 					<UserInfo
@@ -76,18 +78,20 @@ export class Profile extends Component {
 						handleChange={this.handleChange}
 					/>
 				);
-			case "changePassword":
+			case "changepassword":
 				return <ChangePassword />;
-			case "owner":
-				return <Property orientation="horizontal" myAccomod="true" />;
+			case "my-accommod":
+				return <Property orientation="horizontal" myAccomod={true} />;
 			case "favorite":
 				return <Property orientation="horizontal" />;
 			default:
+				this.context.redirectTo("/profile");
 				break;
 		}
 	}
 
 	render() {
+		if (!this.context.state.isLoggedIn) this.context.redirectTo("/");
 		return (
 			<div id="page-wraper" class="container">
 				<div class="col-md-12">

@@ -40,43 +40,48 @@ class Header extends React.Component {
 							</ul>
 						</div>
 						<AuthContext.Consumer>
-							{({ logIn, logOut, state, redirectTo }) => (
-								<>
-									{state.isLoggedIn ? (
-										<>
-											<button
-												type="button"
-												className="btn rounded btn-b-n navbar-toggle-box-collapse d-none d-md-block"
-												onClick={() => redirectTo("/profile/aboutme")}
-											>
-												{/* <span className="fa fa-search" aria-hidden="true"></span> */}
-												Profile
-											</button>
-											<button
-												className="btn btn-secondary"
-												onClick={() => logOut()}
-											>
-												Logout
-											</button>
-										</>
-									) : (
-										<>
-											<button
-												className="btn btn-primary"
-												onClick={() => redirectTo("/sign-in")}
-											>
-												Login
-											</button>
-											<button
-												className="btn btn-light"
-												onClick={() => redirectTo("/sign-up")}
-											>
-												Register
-											</button>
-										</>
-									)}
-								</>
-							)}
+							{({ logIn, logOut, state, redirectTo }) => {
+								{
+									/* console.log(state); */
+								}
+								return (
+									<>
+										{state.isLoggedIn ? (
+											<>
+												<button
+													type="button"
+													className="btn rounded btn-b-n navbar-toggle-box-collapse d-none d-md-block"
+													onClick={() => redirectTo("/profile/aboutme")}
+												>
+													{/* <span className="fa fa-search" aria-hidden="true"></span> */}
+													Profile
+												</button>
+												<button
+													className="btn btn-secondary"
+													onClick={() => logOut()}
+												>
+													Logout
+												</button>
+											</>
+										) : (
+											<>
+												<button
+													className="btn btn-primary"
+													onClick={() => redirectTo("/sign-in")}
+												>
+													Login
+												</button>
+												<button
+													className="btn btn-light"
+													onClick={() => redirectTo("/sign-up")}
+												>
+													Register
+												</button>
+											</>
+										)}
+									</>
+								);
+							}}
 						</AuthContext.Consumer>
 					</div>
 				</nav>

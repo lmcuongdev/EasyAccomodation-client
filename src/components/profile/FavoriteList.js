@@ -5,7 +5,7 @@ export class FavoriteList extends Component {
 	render() {
 		return (
 			<div className="container">
-				<Property />
+				<Property/>
 			</div>
 		);
 	}
