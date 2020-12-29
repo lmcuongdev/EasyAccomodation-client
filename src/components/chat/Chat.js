@@ -10,10 +10,15 @@ import Search from "./Search";
 export class Chat extends Component {
 	constructor(props) {
 		super(props);
+		this.data = {};
+
+		if (localStorage.userData) {
+			this.data = JSON.parse(localStorage.userData);
+		}
 		this.state = {
 			mes_history: [],
 			receiverId: this.props.match.params.id,
-			senderId: this.props.match.params.id_sender,
+			senderId: this.data.userId,
 		};
 	}
 

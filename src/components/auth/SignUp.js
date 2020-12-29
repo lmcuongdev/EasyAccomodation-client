@@ -167,7 +167,7 @@ export class SignUp extends Component {
 										</div>
 									</>
 								) : null}
-								<div>
+								<div className="finish">
 									<button className="btn btn--radius-2 btn--red" type="submit">
 										Register
 									</button>

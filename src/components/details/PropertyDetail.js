@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 
 import "./css/PropertyDetail.css";
+import "./css/IntroProperty.css";
 
 import PropertyInfo from "./PropertyInfo";
 import PropertyDescription from "./PropertyDescription";
@@ -15,6 +16,8 @@ class PropertyDetail extends React.Component {
 		super(props);
 
 		this.state = {
+			like: false,
+
 			id: this.props.match.params.id,
 			has_water_heater: false,
 			has_private_bathroom: false,
@@ -39,6 +42,12 @@ class PropertyDetail extends React.Component {
 			title: "Title",
 		};
 	}
+
+	handleClick = () => {
+		this.setState((prevState) => {
+			return { like: !prevState.like };
+		});
+	};
 
 	componentDidMount() {
 		axios
@@ -81,17 +90,23 @@ class PropertyDetail extends React.Component {
 						<PropertySlider />
 						<section className="intro-single">
 							<div className="title-single-box">
-								<div>
+								<div class="interact-btn">
 									{this.state.is_available === true ? (
-										<button className="btn btn-info btn-lg">For rent</button>
+										<label className="btn btn-info btn-lg">For rent</label>
 									) : (
-										<button className="btn btn-warning btn-lg">Sold out</button>
+										<label className="btn btn-warning btn-lg">Sold out</label>
 									)}
 
 									<Report />
-									<button className="btn btn-outline-danger btn-lg">
-										<i className="fa fa-heart"></i>Like
-									</button>
+									<label
+										className={`btn btn-outline-danger btn-lg
+                    ${this.state.like ? "liked" : ""}
+                    `}
+										onClick={this.handleClick}
+									>
+										<i className="fa fa-heart"></i>
+										Like
+									</label>
 								</div>
 								<h1 className="title-single">{this.state.title}</h1>
 							</div>

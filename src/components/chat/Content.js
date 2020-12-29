@@ -39,19 +39,21 @@ export class Content extends Component {
 
 		socket.on("roomId", (data) => {
 			this.setState({ roomId: data.roomId }, () => {
-				axios
-					.get(`http://localhost:8080/messages/room/${this.state.roomId}`)
-					.then((res) => {
-						let messages = [];
-						for (let item of res.data.messages) {
-							if (item.userId === this.props.senderId) {
-								messages.push({ type: "sent", content: item.content });
-							} else {
-								messages.push({ type: "replies", content: item.content });
+				if (this.state.roomId) {
+					axios
+						.get(`http://localhost:8080/messages/room/${this.state.roomId}`)
+						.then((res) => {
+							let messages = [];
+							for (let item of res.data.messages) {
+								if (item.userId === this.props.senderId) {
+									messages.push({ type: "sent", content: item.content });
+								} else {
+									messages.push({ type: "replies", content: item.content });
+								}
 							}
-						}
-						this.setState({ messages });
-					});
+							this.setState({ messages });
+						});
+				}
 			});
 		});
 

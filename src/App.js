@@ -13,11 +13,17 @@ import PropertyDetail from "./components/details/PropertyDetail";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import Popup from "./components/popup/Popup";
-import FavoriteList from "./components/profile/FavoriteList";
 import Profile from "./components/profile/Profile";
 import NotFound from "./components/NotFound";
 import Rent from "./components/post/Rent";
 import Chat from "./components/chat/Chat";
+
+import "./admin/assets/plugins/nucleo/css/nucleo.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./admin/assets/scss/argon-dashboard-react.scss";
+
+import AdminLayout from "./admin/layouts/Admin";
+import AuthLayout from "./admin/layouts/Auth";
 
 import AuthProvider from "./contexts/AuthProvider";
 class App extends Component {
@@ -25,6 +31,7 @@ class App extends Component {
 		super();
 		this.state = {
 			popupState: "close",
+			adminPage: true,
 		};
 
 		this.openPopup = this.openPopup.bind(this);
@@ -51,25 +58,44 @@ class App extends Component {
 		return (
 			<Router>
 				<AuthProvider>
-					<Header openPopup={this.openPopup} />
-					<Popup
-						popupState={this.state.popupState}
-						handleClose={this.closePopup}
-					/>
-					<div className="container" id="container-content">
+					{this.state.adminPage ? (
 						<Switch>
-							<Route path="/" exact component={Home} />
-							<Route path="/sign-in" component={SignIn} exact />
-							<Route path="/sign-up" component={SignUp} />
-							<Route path="/property-detail/:id" component={PropertyDetail} />
-							<Route path="/profile/:page" component={Profile} exact />
-							<Route path="/rent" component={Rent} />
-							<Route exact path="/chat/:id/:id_sender" component={Chat} />
-							<Route path="/chat/:id_sender" component={Chat} />
-							<Route component={NotFound} />
+							<Route
+								path="/admin"
+								render={(props) => <AdminLayout {...props} />}
+							/>
+							<Route
+								path="/auth"
+								render={(props) => <AuthLayout {...props} />}
+							/>
+							{/* <Redirect from="/" to="/admin/index" /> */}
 						</Switch>
-					</div>
-					<Footer />
+					) : (
+						<>
+							<Header openPopup={this.openPopup} />
+							<Popup
+								popupState={this.state.popupState}
+								handleClose={this.closePopup}
+							/>
+							<div className="container" id="container-content">
+								<Switch>
+									<Route path="/" exact component={Home} />
+									<Route path="/sign-in" component={SignIn} exact />
+									<Route path="/sign-up" component={SignUp} />
+									<Route
+										path="/property-detail/:id"
+										component={PropertyDetail}
+									/>
+									<Route path="/profile/:page" component={Profile} exact />
+									<Route path="/rent" component={Rent} />
+									<Route exact path="/chat/:id" component={Chat} />
+									<Route path="/chat" component={Chat} />
+									<Route component={NotFound} />
+								</Switch>
+							</div>
+							<Footer />{" "}
+						</>
+					)}
 				</AuthProvider>
 			</Router>
 		);

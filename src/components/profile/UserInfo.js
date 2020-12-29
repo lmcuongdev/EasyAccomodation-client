@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import { Link } from "react-router-dom";
-
 export class UserInfo extends Component {
 	render() {
 		return (
@@ -35,39 +33,44 @@ export class UserInfo extends Component {
 											type="email"
 											name="email"
 											value={this.props.email}
-											onChange={this.props.handleChange}
+											disabled
 										/>
 									</div>
 								</div>
 							</div>
-							<div class="form-row m-b-55">
-								<div class="name">Phone</div>
-								<div class="value">
-									<div class="input-group">
-										<input
-											class="input--style-5"
-											type="text"
-											name="phone"
-											value={this.props.phone}
-											onChange={this.props.handleChange}
-										/>
+							{this.props.role === "owner" ? (
+								<>
+									<div class="form-row m-b-55">
+										<div class="name">Phone</div>
+										<div class="value">
+											<div class="input-group">
+												<input
+													class="input--style-5"
+													type="text"
+													name="phone"
+													value={this.props.phone}
+													onChange={this.props.handleChange}
+												/>
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="name">Address</div>
-								<div class="value">
-									<div class="input-group">
-										<input
-											class="input--style-5"
-											type="text"
-											name="address"
-											value={this.props.address}
-											onChange={this.props.handleChange}
-										/>
-									</div>
-								</div>
-							</div>
+									<div class="form-row">
+										<div class="name">Address</div>
+										<div class="value">
+											<div class="input-group">
+												<input
+													class="input--style-5"
+													type="text"
+													name="address"
+													value={this.props.address}
+													onChange={this.props.handleChange}
+												/>
+											</div>
+										</div>
+									</div>{" "}
+								</>
+							) : null}
+
 							<div className="finish">
 								<button className="btn btn--radius-2 btn--red">Update</button>
 							</div>

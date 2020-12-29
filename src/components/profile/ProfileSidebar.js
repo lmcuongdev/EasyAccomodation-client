@@ -24,9 +24,9 @@ export class ProfileSidebar extends Component {
 					<nav class="main-nav" role="navigation">
 						<ul class="main-menu">
 							<li
-								className={this.props.page !== "aboutMe" || "bg-primary"}
+								className={this.props.page !== "aboutme" || "bg-primary"}
 								onClick={() => {
-									this.handleClick("profile/aboutMe");
+									this.handleClick("profile/aboutme");
 								}}
 							>
 								<span>About Me</span>
@@ -39,8 +39,7 @@ export class ProfileSidebar extends Component {
 							>
 								<span>Favorite Accomod</span>
 							</li>
-							{this.props.role === "owner"}
-							{
+							{this.props.role === "owner" ? (
 								<>
 									<li
 										className={this.props.page !== "owner" || "bg-primary"}
@@ -59,7 +58,7 @@ export class ProfileSidebar extends Component {
 										<span>New post</span>
 									</li>
 								</>
-							}
+							) : null}
 							<li
 								className={this.props.page !== "changePassword" || "bg-primary"}
 								onClick={() => {

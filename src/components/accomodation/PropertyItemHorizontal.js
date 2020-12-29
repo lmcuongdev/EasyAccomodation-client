@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Deadline from "../post/Deadline";
 
 export class PropertyItemHorizontal extends Component {
 	constructor(props) {
@@ -34,7 +35,7 @@ export class PropertyItemHorizontal extends Component {
 			} else {
 				return (
 					<Link to="/">
-						Chinh sua bai viet <i class="fa fa-arrow-right"></i>
+						Chỉnh sửa bài viết <i class="fa fa-arrow-right"></i>
 					</Link>
 				);
 			}
@@ -105,6 +106,12 @@ export class PropertyItemHorizontal extends Component {
 								</li>
 							</ul> */}
 						</div>
+						{/* <p style={{ color: "blue" }}>16 day left</p> */}
+						{this.props.myAccomod && this.props.isVerified ? (
+							<div style={{ marginBottom: "30px", marginTop: "10px" }}>
+								<Deadline lineHeightSm={true} />
+							</div>
+						) : null}
 					</div>
 					<img
 						src="https://res.cloudinary.com/mhmd/image/upload/v1556485076/shoes-1_gthops.jpg"
