@@ -61,6 +61,7 @@ class Property extends React.Component {
 								ward={item.ward}
 								district={item.district}
 								area={item.area}
+								images={item.images}
 							/>
 						);
 					});

@@ -34,10 +34,13 @@ import {
 	Container,
 	Media,
 } from "reactstrap";
+import AuthContext from "../../../contexts/AuthContext";
 
 import Image from "../../../images/logo512.png";
 
 class AdminNavbar extends React.Component {
+	static contextType = AuthContext;
+
 	render() {
 		return (
 			<>
@@ -70,7 +73,7 @@ class AdminNavbar extends React.Component {
 										</span>
 										<Media className="ml-2 d-none d-lg-block">
 											<span className="mb-0 text-sm font-weight-bold">
-												Jessica Jones
+												Admin
 											</span>
 										</Media>
 									</Media>
@@ -97,11 +100,13 @@ class AdminNavbar extends React.Component {
 									</DropdownItem>
 									<DropdownItem divider />
 									<DropdownItem
-										href="#pablo"
-										onClick={(e) => e.preventDefault()}
+										href="/"
+										onClick={(e) => {
+											this.context.logOut();
+										}}
 									>
 										<i className="ni ni-user-run" />
-										<span>Logout</span>
+										<span onClick={() => {}}>Logout</span>
 									</DropdownItem>
 								</DropdownMenu>
 							</UncontrolledDropdown>

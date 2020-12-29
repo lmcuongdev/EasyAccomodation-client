@@ -18,7 +18,7 @@ class PropertyItem extends React.Component {
 			<div className="col-md-4">
 				<article className="aa-properties-item">
 					<Link to="/" className="aa-properties-item-img">
-						<img src={Image} alt="img" />
+						<img src={this.props.images[0]} alt="img" />
 					</Link>
 					{this.showState()}
 					<div className="aa-properties-item-content">

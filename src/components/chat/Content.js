@@ -125,7 +125,7 @@ export class Content extends Component {
 	render() {
 		return (
 			<div className="content">
-				<ContactProfile receiverName={this.props.receiverId} />
+				<ContactProfile receiverName={this.props.name} />
 				<Message messages={this.state.messages} />
 				<MessageInput
 					sendMessage={this.sendMessage}

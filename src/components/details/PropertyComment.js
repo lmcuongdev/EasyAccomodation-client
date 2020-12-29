@@ -2,13 +2,17 @@ import React, { Component } from "react";
 import axios from "axios";
 import CommentForm from "./comment/CommentForm";
 import CommentInput from "./comment/CommentInput";
-
+import AuthContext from "../../contexts/AuthContext";
 export class PropertyComment extends Component {
+	static contextType = AuthContext;
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			reviews_list: [],
+			alert: null,
 		};
+		this.submitReview = this.submitReview.bind(this);
 	}
 
 	componentDidMount() {
@@ -19,8 +23,27 @@ export class PropertyComment extends Component {
 			.then((res) => {
 				const data = res.data.reviews;
 				if (data) {
-					this.setState({ reviews_list: data });
+					this.setState({
+						reviews_list: data,
+
+						// alert: { message: err.response?.data.message, type: "danger" },
+					});
 				}
+			});
+	}
+
+	submitReview(data) {
+		axios
+			.post(
+				`${process.env.REACT_APP_API_URL}/accommodations/${this.props.id}/reviews/create`,
+				data,
+				{
+					headers: { Authorization: `Bearer ${this.context.state.token}` },
+				}
+			)
+			.then((resp) => {
+				this.setState({ alert: { type: "success" } });
+				console.log(resp.data);
 			});
 	}
 
@@ -36,7 +59,12 @@ export class PropertyComment extends Component {
 				</div>
 				<div className="row">
 					<div className="col-sm-12">
-						<CommentInput />
+						{this.context.state.isLoggedIn && (
+							<CommentInput
+								submitReview={this.submitReview}
+								alert={this.state.alert}
+							/>
+						)}
 						<div>
 							{this.state.reviews_list.map((item) => {
 								if (item.status === "verified") {

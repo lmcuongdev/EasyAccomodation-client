@@ -19,49 +19,76 @@ import AccommodationHeader from "../../components/Headers/AccommodationHeader.js
 import axios from "axios";
 
 import Image from "../../../images/logo512.png";
+import AuthContext from "../../../contexts/AuthContext";
 
 class Accommodations extends React.Component {
+	static contextType = AuthContext;
+
 	state = {
-		accommodation: {},
+		has_water_heater: "",
+		has_private_bathroom: "",
+		images: "",
+		is_available: "",
+		status: "",
+		reviews: "",
+		views: "",
+		ward: "",
+		district: "",
+		city: "",
+		address: "",
+		type: "",
+		number_of_room: "",
+		price: "",
+		area: "",
+		owner: "",
+		same_owner: "",
+		has_air_condition: "",
+		has_balcony: "",
+		description: "",
+		kitchen: "",
+		name: "",
+		phone: "",
 	};
 	componentDidMount = () => {
 		axios
 			.get(
-				"https://easy-accommodation-api.herokuapp.com/api/accommodations/5fe3958c3759dc3a25834a1b"
+				`${process.env.REACT_APP_API_URL}/accommodations/${this.props.match.params.id}`,
+				{
+					headers: { Authorization: `Bearer ${this.context.state.token}` },
+				}
 			)
 			.then((res) => {
 				var item = res.data.accommodation;
 				this.setState({
-					accommodation: {
-						has_water_heater: item.has_water_heater,
-						has_private_bathroom: item.has_private_bathroom,
-						images: item.images,
-						is_available: item.is_available,
-						status: "verified",
-						reviews: item.reviews,
-						views: item.views,
-						ward: item.ward,
-						district: item.district,
-						city: item.city,
-						address: item.address,
-						type: item.type,
-						number_of_room: item.number_of_room,
-						price: item.price,
-						area: item.area,
-						owner: item.owner,
-						same_owner: item.same_owner,
-						has_air_condition: item.has_air_condition,
-						has_balcony: item.has_balcony,
-						description: item.description,
-						kitchen: item.kitchen,
-						name: item.name,
-						phone: item.phone,
-					},
+					...item,
 				});
 			});
 	};
-	render() {
-		const data = this.state.accommodation;
+
+	handleChange = (e) => {
+		const { name, value } = e.target;
+		this.setState({ [name]: value });
+	};
+
+	updateChange = () => {
+		axios
+			.put(
+				`${process.env.REACT_APP_API_URL}/accommodations/${this.props.match.params.id}`,
+				{ ...this.state },
+				{
+					headers: { Authorization: `Bearer ${this.context.state.token}` },
+				}
+			)
+			.then((res) => {
+				var item = res.data.accommodation;
+				this.setState({
+					...item,
+				});
+			});
+	};
+
+	render = () => {
+		const data = this.state;
 		return (
 			<>
 				<AccommodationHeader />
@@ -107,7 +134,7 @@ class Accommodations extends React.Component {
 									<div className="text-center">
 										<h3>
 											<span className="font-weight-light">Chủ trọ: </span>
-											{data.name}
+											{this.state.name}
 										</h3>
 										<div className="h5 font-weight-300">
 											<i className="ni location_pin mr-2" />
@@ -122,7 +149,7 @@ class Accommodations extends React.Component {
 											University of Computer Science
 										</div>
 										<hr className="my-4" />
-										<p>{data.description}</p>
+										<p>{this.state.description}</p>
 									</div>
 								</CardBody>
 							</Card>
@@ -155,7 +182,7 @@ class Accommodations extends React.Component {
 														<input
 															type="checkbox"
 															className="switch"
-															checked={data.has_water_heater}
+															checked={this.state.has_water_heater}
 														/>
 													</FormGroup>
 												</Col>
@@ -172,7 +199,7 @@ class Accommodations extends React.Component {
 														<input
 															type="checkbox"
 															className="switch"
-															checked={data.has_balcony}
+															checked={this.state.has_balcony}
 															onClick=""
 														/>
 													</FormGroup>
@@ -191,7 +218,7 @@ class Accommodations extends React.Component {
 														<input
 															type="checkbox"
 															className="switch"
-															checked={data.has_private_bathroom}
+															checked={this.state.has_private_bathroom}
 														/>
 													</FormGroup>
 												</Col>
@@ -207,7 +234,7 @@ class Accommodations extends React.Component {
 														<input
 															type="checkbox"
 															className="switch"
-															checked={data.has_air_condition}
+															checked={this.state.has_air_condition}
 														/>
 													</FormGroup>
 												</Col>
@@ -225,7 +252,7 @@ class Accommodations extends React.Component {
 														<input
 															type="checkbox"
 															className="switch"
-															checked={data.is_available}
+															checked={this.state.is_available}
 														/>
 													</FormGroup>
 												</Col>
@@ -241,7 +268,7 @@ class Accommodations extends React.Component {
 														<input
 															type="checkbox"
 															className="switch"
-															checked={data.same_owner}
+															checked={this.state.same_owner}
 														/>
 													</FormGroup>
 												</Col>
@@ -258,7 +285,9 @@ class Accommodations extends React.Component {
 														</label>
 														<Input
 															className="form-control-alternative"
-															defaultValue={data.views}
+															onChange={this.handleChange}
+															name="views"
+															value={this.state.views}
 															placeholder="Số lượt xem"
 															type="number"
 														/>
@@ -271,7 +300,9 @@ class Accommodations extends React.Component {
 														</label>
 														<Input
 															className="form-control-alternative"
-															defaultValue={data.number_of_room}
+															onChange={this.handleChange}
+															name="number_of_room"
+															value={this.state.number_of_room}
 															placeholder="Số lượng"
 															type="email"
 														/>
@@ -286,7 +317,9 @@ class Accommodations extends React.Component {
 														</label>
 														<Input
 															className="form-control-alternative"
-															defaultValue={data.price}
+															onChange={this.handleChange}
+															name="price"
+															value={this.state.price}
 															placeholder="VNĐ"
 															type="email"
 														/>
@@ -299,7 +332,9 @@ class Accommodations extends React.Component {
 														</label>
 														<Input
 															className="form-control-alternative"
-															defaultValue={data.area}
+															onChange={this.handleChange}
+															name="area"
+															value={this.state.area}
 															placeholder="mét vuông"
 															type="email"
 														/>
@@ -318,7 +353,9 @@ class Accommodations extends React.Component {
 														<Input
 															className="form-control-alternative"
 															placeholder="Địa chỉ"
-															defaultValue={data.address}
+															onChange={this.handleChange}
+															name="address"
+															value={this.state.address}
 															type="text"
 														/>
 													</FormGroup>
@@ -329,7 +366,9 @@ class Accommodations extends React.Component {
 														<Input
 															className="form-control-alternative"
 															placeholder="Tên đường"
-															defaultValue={data.ward}
+															onChange={this.handleChange}
+															name="ward"
+															value={this.state.ward}
 															type="text"
 														/>
 													</FormGroup>
@@ -344,7 +383,9 @@ class Accommodations extends React.Component {
 														<Input
 															className="form-control-alternative"
 															placeholder="Tên"
-															defaultValue={data.city}
+															onChange={this.handleChange}
+															name="city"
+															value={this.state.city}
 															type="text"
 														/>
 													</di>
@@ -357,7 +398,9 @@ class Accommodations extends React.Component {
 														<Input
 															className="form-control-alternative"
 															placeholder="Nước"
-															defaultValue="Việt Nam"
+															onChange={this.handleChange}
+															name="name"
+															value="Việt Nam"
 															type="text"
 														/>
 													</FormGroup>
@@ -370,7 +413,9 @@ class Accommodations extends React.Component {
 														<Input
 															className="form-control-alternative"
 															placeholder="0123456789"
-															defaultValue={data.phone}
+															onChange={this.handleChange}
+															name="phone"
+															value={this.state.phone}
 															type="tel"
 														/>
 													</FormGroup>
@@ -387,17 +432,23 @@ class Accommodations extends React.Component {
 											<input
 												type="checkbox"
 												className="switch"
-												checked="true"
+												checked={this.state.status !== "pending" && true}
+												onChange={(e) => {
+													this.setState((prev) => {
+														return {
+															status:
+																prev.status === "pending"
+																	? "verified"
+																	: "pending",
+														};
+													});
+												}}
 											></input>
 										</FormGroup>
 									</Form>
 								</CardBody>
 							</Card>
-							<Button
-								color="info"
-								className="ml-3"
-								onClick={(e) => e.preventDefault()}
-							>
+							<Button color="info" className="" onClick={this.updateChange}>
 								Save
 							</Button>
 						</Col>
@@ -405,7 +456,7 @@ class Accommodations extends React.Component {
 				</Container>
 			</>
 		);
-	}
+	};
 }
 
 export default Accommodations;

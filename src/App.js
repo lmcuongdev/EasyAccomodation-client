@@ -32,7 +32,10 @@ import AuthLayout from "./admin/layouts/Auth";
 
 import AuthProvider from "./contexts/AuthProvider";
 import Navbar from "./components/navbar/NavbarRB";
+import AuthContext from "./contexts/AuthContext";
 class App extends Component {
+	static contextType = AuthContext;
+
 	constructor() {
 		super();
 		this.state = {
@@ -62,58 +65,35 @@ class App extends Component {
 
 	render() {
 		return (
-			<Router>
-				<AuthProvider>
-					{this.state.adminPage ? (
-						<Switch>
-							<Route
-								path="/admin"
-								render={(props) => <AdminLayout {...props} />}
-							/>
-							<Route
-								path="/auth"
-								render={(props) => <AuthLayout {...props} />}
-							/>
-							{/* <Redirect from="/" to="/admin/index" /> */}
-
-							<Route component={NotFound} />
-						</Switch>
-					) : (
-						<>
-							<Navbar openPopup={this.openPopup} />
-							<Popup
-								popupState={this.state.popupState}
-								handleClose={this.closePopup}
-							/>
-							<div className="container" id="container-content">
-								<Switch>
-									<Route path="/" exact component={Home} />
-									<Route path="/sign-in" component={SignIn} exact />
-									<Route path="/sign-up" component={SignUp} exact />
-									<Route
-										path="/property-detail/:id/edit"
-										render={(props) => <Rent edit={true} {...props} />}
-									/>
-									<Route
-										path="/property-detail/:id"
-										component={PropertyDetail}
-									/>
-									<Route path="/profile/:page" component={Profile} />
-									<Route
-										path="/profile"
-										component={() => <Redirect to="/profile/aboutme" />}
-									/>
-									<Route path="/rent" component={Rent} />
-									<Route exact path="/chat/:id" component={Chat} />
-									<Route path="/chat" component={Chat} />
-									<Route component={NotFound} />
-								</Switch>
-							</div>
-							<Footer />{" "}
-						</>
-					)}
-				</AuthProvider>
-			</Router>
+			<>
+				<Navbar openPopup={this.openPopup} />
+				<Popup
+					popupState={this.state.popupState}
+					handleClose={this.closePopup}
+				/>
+				<div className="container py-3 mb-4" id="container-content">
+					<Switch>
+						<Route path="/" exact component={Home} />
+						<Route path="/sign-in" component={SignIn} exact />
+						<Route path="/sign-up" component={SignUp} exact />
+						<Route
+							path="/property-detail/:id/edit"
+							render={(props) => <Rent edit={true} {...props} />}
+						/>
+						<Route path="/property-detail/:id" component={PropertyDetail} />
+						<Route path="/profile/:page" component={Profile} />
+						<Route
+							path="/profile"
+							component={() => <Redirect to="/profile/aboutme" />}
+						/>
+						<Route path="/rent" component={Rent} />
+						<Route exact path="/chat/:id" component={Chat} />
+						<Route path="/chat" component={Chat} />
+						<Redirect from="*" to="/" />
+					</Switch>
+				</div>
+				<Footer />
+			</>
 		);
 	}
 }
